@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="AskMeYellowGeneral">#FAB70C</color>
+    <color name="AskMeGraySettingsButton">#D9D9D9</color>
+    <color name="AskMeRedWrongAnswer">#F06666</color>
+    <color name="AskMeGreenCorrectAnswer">#27C11A</color>
+    <color name="AskMeFaintWhiteFinnishWord">#EBEFF2</color>
 </resources>
