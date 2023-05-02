@@ -1,8 +1,10 @@
 package com.example.askme
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.example.askme.exercise.ExerciseMain
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         // (connect each icon image and its button and adjust constraints)
 
         buttonOpenExercise.setOnClickListener {
-            //TODO: open the first exercise view
+            val intent = Intent(this, ExerciseMain::class.java)
+            startActivity(intent)
         }
 
         buttonSettings.setOnClickListener{

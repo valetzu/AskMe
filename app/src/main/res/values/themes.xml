@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.AskMe" parent="Base.Theme.AskMe" />
+
+    <style name="Button.Yellow" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/AskMeYellowGeneral</item>
+    </style>
 </resources>

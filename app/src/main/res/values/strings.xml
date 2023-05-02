@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AskMe</string>
+    <string name="x">X</string>
+    <string name="en1">EN1</string>
+    <string name="suomi">suomi</string>
+    <string name="hevonen">hevonen</string>
+    <string name="englanti">englanti</string>
+    <string name="tarkasta_vastaus">Tarkasta vastaus</string>
+    <string name="a_horse">A horse</string>
+    <string name="oikein">Oikein!</string>
+    <string name="kirjoita_vastauksesi_t_h_n">Kirjoita vastauksesi tähän</string>
+    <string name="v_rin">Väärin</string>
 </resources>
