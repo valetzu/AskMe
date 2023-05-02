@@ -10,4 +10,8 @@
     <string name="oikein">Oikein!</string>
     <string name="kirjoita_vastauksesi_t_h_n">Kirjoita vastauksesi tähän</string>
     <string name="v_rin">Väärin</string>
+    <string name="oikeita_vastauksia_x">Oikeita vastauksia X</string>
+    <string name="v_ri_vastauksia_x">Vääriä vastauksia X</string>
+    <string name="tulos_x">Tulos X</string>
+    <string name="palaa_p_valikkoon">Palaa päävalikkoon</string>
 </resources>

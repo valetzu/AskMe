@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clExerciseMain"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:outlineProvider="none">
+    android:layout_height="match_parent">
 
 
     <androidx.cardview.widget.CardView
@@ -167,7 +166,8 @@
                 android:text="@string/oikein"
                 android:textAlignment="center"
                 android:textSize="50sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvRightAnswerDescription"
@@ -175,7 +175,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/a_horse"
                 android:textAlignment="center"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -209,7 +210,8 @@
                 android:text="@string/v_rin"
                 android:textAlignment="center"
                 android:textSize="50sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvWrongAnswerDescription"
@@ -217,19 +219,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/a_horse"
                 android:textAlignment="center"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/btnCheckButton"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:backgroundTint="@color/AskMeYellowGeneral"
-        android:outlineProvider="paddedBounds"
-
         android:text="@string/tarkasta_vastaus"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -237,10 +238,36 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        android:layout_marginBottom="20dp"
+
+
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/btnContinueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:backgroundTint="@color/AskMeYellowGeneral"
+        android:text="Jatka"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="20dp"
+
+
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

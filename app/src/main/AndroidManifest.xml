@@ -15,7 +15,12 @@
         <activity
             android:name=".exercise.ExerciseMain"
             android:label="ExerciseMain"
-            android:theme="@style/Theme.AskMe" />
+            android:theme="@style/Theme.AskMe"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".exercise.ResultScreen"
+            android:label="ResultScreen"
+            android:theme="@style/Theme.AskMe"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
