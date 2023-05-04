@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">AskMe</string>
+    <!-- Main menu -->
+
+    <!-- Settings -->
+    <string name="settingsTopBarText">Asetukset</string>
+    <!-- ExerciseMain -->
     <string name="x">X</string>
     <string name="en1">EN1</string>
     <string name="suomi">suomi</string>
@@ -14,4 +19,5 @@
     <string name="v_ri_vastauksia_x">Vääriä vastauksia X</string>
     <string name="tulos_x">Tulos X</string>
     <string name="palaa_p_valikkoon">Palaa päävalikkoon</string>
+
 </resources>

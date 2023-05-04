@@ -9,11 +9,11 @@
         android:id="@+id/ivAskyResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/asky_result"
-        android:layout_marginTop="30dp"/>
+        app:srcCompat="@drawable/asky_logo_gratz" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvResultBox"

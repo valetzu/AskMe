@@ -12,18 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AskMe"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".SettingsScreen"
+            android:label="SettingsMain"
+            android:theme="@style/Theme.AskMe"
+            android:exported="false" />
         <activity
             android:name=".exercise.ExerciseMain"
             android:label="ExerciseMain"
             android:theme="@style/Theme.AskMe"
-            android:windowSoftInputMode="stateVisible"/>
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".exercise.ResultScreen"
             android:label="ResultScreen"
-            android:theme="@style/Theme.AskMe"/>
+            android:theme="@style/Theme.AskMe" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

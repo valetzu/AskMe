@@ -3,7 +3,9 @@ package com.example.askme
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.askme.exercise.ExerciseMain
 
 class MainActivity : AppCompatActivity() {
@@ -11,8 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val buttonOpenExercise = findViewById<TextView>(R.id.btnOpenExercise)
-        val buttonSettings = findViewById<TextView>(R.id.btnSettings)
+        val buttonOpenExercise = findViewById<Button>(R.id.btnOpenExercise)
+        val buttonSettings = findViewById<Button>(R.id.btnSettings)
+        val buttonNewExercise = findViewById<Button>(R.id.btnNewExercise)
 
         //TODO: improve the buttons on start view
         // (connect each icon image and its button and adjust constraints)
@@ -23,7 +26,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSettings.setOnClickListener{
-            //TODO: open the settings view
+            val intent = Intent(this, SettingsScreen::class.java)
+            startActivity(intent)
+        }
+
+        buttonNewExercise.setOnClickListener{
+            Toast.makeText(this@MainActivity,
+                "Feature is currently locked. Coming soon!",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }
