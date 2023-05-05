@@ -2,6 +2,7 @@ package com.example.askme.exercise
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.INVISIBLE
@@ -21,11 +22,16 @@ class ExerciseMain : AppCompatActivity() {
     var rightAnswerAmount = 0
     var wrongAnswerAmount = 0
     var enteredAnswer = ""
+    private lateinit var sf:SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exercise_main)
+
+        sf = getSharedPreferences("my_sf", MODE_PRIVATE)
+        editor = sf.edit()
 
         questionNumber = 0
         wrongAnswerAmount = 0
@@ -91,5 +97,22 @@ class ExerciseMain : AppCompatActivity() {
         intent.putExtra("WRONGANSWERAMOUNT", wrongAnswerAmount)
         intent.putExtra("RIGHTANSWERAMOUNT", rightAnswerAmount)
         startActivity(intent)
+    }
+    override fun onPause() {
+        super.onPause()
+        val rAnswer = rightAnswerAmount.toInt()
+        val wAnswer = wrongAnswerAmount.toInt()
+        editor.apply{
+            putInt("sf_rightAnswer", rAnswer)
+            putInt("sf_wrongAnswer", wAnswer)
+            commit()
+        }
+    }
+    override fun onResume(){
+        super.onResume()
+        val resumeRightAnswer = sf.getInt("sf_rightAnswer", 0)
+        val resumeWrongAnswer = sf.getInt("sf_wrongAnswer", 0)
+        wrongAnswerAmount = resumeWrongAnswer
+        rightAnswerAmount = resumeRightAnswer
     }
 }

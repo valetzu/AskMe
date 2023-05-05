@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.askme.exercise.ChooseExercise
 import com.example.askme.exercise.ExerciseMain
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         // (connect each icon image and its button and adjust constraints)
 
         buttonOpenExercise.setOnClickListener {
-            val intent = Intent(this, ExerciseMain::class.java)
+            val intent = Intent(this, ChooseExercise::class.java)
             startActivity(intent)
         }
 

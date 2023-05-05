@@ -25,6 +25,10 @@
             android:theme="@style/Theme.AskMe"
             android:windowSoftInputMode="stateVisible" />
         <activity
+            android:name=".exercise.ChooseExercise"
+            android:label="ChooseExercise"
+            android:theme="@style/Theme.AskMe" />
+        <activity
             android:name=".exercise.ResultScreen"
             android:label="ResultScreen"
             android:theme="@style/Theme.AskMe" />
