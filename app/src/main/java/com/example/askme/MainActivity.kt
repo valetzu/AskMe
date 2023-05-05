@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import com.example.askme.exercise.ChooseExercise
 import com.example.askme.exercise.ExerciseMain
 import com.example.askme.settings.SettingsScreen
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val buttonNewExercise = findViewById<Button>(R.id.btnNewExercise)
 
         buttonOpenExercise.setOnClickListener {
-            val intent = Intent(this, ExerciseMain::class.java)
+            val intent = Intent(this, ChooseExercise::class.java)
             startActivity(intent)
         }
 
