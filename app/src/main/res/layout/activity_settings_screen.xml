@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     android:layout_margin="0dp"
     android:background="@color/AskMeGraySettingsButton"
-    tools:context=".SettingsScreen">
+    tools:context=".settings.SettingsScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvTopBar"
@@ -31,6 +35,7 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/AskMeYellowGeneral"
                     android:drawableLeft="@drawable/close_icon"
+                    android:text="@string/settingsTopBarText"
                     android:textColor="@color/black"
                     android:textSize="40sp"
                     android:textStyle="bold"
@@ -38,16 +43,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tvTopBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/settingsTopBarText"
-                    android:textSize="40sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -66,14 +61,15 @@
                 <Switch
                     android:id="@+id/swEnableDarkMode"
                     android:layout_width="350dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableLeft="@drawable/moon"
                     android:drawablePadding="10dp"
+                    android:paddingLeft="25dp"
+                    android:switchMinWidth="60dp"
                     android:text="Tumma tila käytössä"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,14 +98,15 @@
                 <Switch
                     android:id="@+id/swEnableSound"
                     android:layout_width="350dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableLeft="@drawable/sound"
                     android:drawablePadding="10dp"
+                    android:paddingLeft="25dp"
+                    android:switchMinWidth="60dp"
                     android:text="Sovelluksen äänet"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,15 +134,15 @@
                 <TextView
                     android:id="@+id/tvSaveExercise"
                     android:layout_width="350dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableLeft="@drawable/folder_open"
                     android:drawablePadding="10dp"
+                    android:paddingLeft="25dp"
                     android:text="Tallenna harjoitukset kansioon"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,6 +164,7 @@
                     android:id="@+id/cvSaveExerciseB"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +175,7 @@
                         android:layout_height="match_parent">
 
                         <EditText
-                            android:id="@+id/editTextText"
+                            android:id="@+id/etSavePath"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
@@ -235,12 +233,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/AskMeGraySettingsButton"
                     android:drawableLeft="@drawable/help_icon"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="25dp"
                     android:text="Ohje"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -266,12 +265,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/AskMeGraySettingsButton"
                     android:drawableLeft="@drawable/info_cropped"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="25dp"
                     android:text="Tietoa sovelluksesta"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

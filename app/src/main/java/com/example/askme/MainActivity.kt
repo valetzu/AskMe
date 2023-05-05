@@ -4,10 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import com.example.askme.exercise.ChooseExercise
 import com.example.askme.exercise.ExerciseMain
+import com.example.askme.settings.SettingsScreen
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity() {
         val buttonOpenExercise = findViewById<Button>(R.id.btnOpenExercise)
         val buttonSettings = findViewById<Button>(R.id.btnSettings)
         val buttonNewExercise = findViewById<Button>(R.id.btnNewExercise)
-
-        //TODO: improve the buttons on start view
-        // (connect each icon image and its button and adjust constraints)
 
         buttonOpenExercise.setOnClickListener {
             val intent = Intent(this, ChooseExercise::class.java)

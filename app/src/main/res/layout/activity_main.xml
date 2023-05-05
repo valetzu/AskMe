@@ -46,8 +46,9 @@
                     android:layout_width="300dp"
                     android:layout_height="75dp"
                     android:backgroundTint="@color/AskMeYellowGeneral"
+                    android:drawableLeft="@drawable/book_open"
                     android:text=" Avaa harjoitus"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="normal"
@@ -59,17 +60,6 @@
                     app:strokeColor="@color/black"
                     app:strokeWidth="2dp" />
 
-                <ImageView
-                    android:id="@+id/imgExercise"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:contentDescription="Exercise Icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/book_open" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -87,8 +77,9 @@
                     android:layout_width="300dp"
                     android:layout_height="75dp"
                     android:backgroundTint="@color/AskMeGraySettingsButton"
+                    android:drawableLeft="@drawable/settings_icon"
                     android:text="Asetukset      "
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="normal"
@@ -100,17 +91,6 @@
                     app:strokeColor="@color/black"
                     app:strokeWidth="2dp" />
 
-                <ImageView
-                    android:id="@+id/imgGear"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:contentDescription="Settings Gear Icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/settings_icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -128,8 +108,10 @@
                     android:layout_width="300dp"
                     android:layout_height="75dp"
                     android:backgroundTint="@color/AskMeGraySettingsButton"
+                    android:drawableLeft="@android:drawable/ic_lock_lock"
+                    android:paddingLeft="40dp"
                     android:text="Luo uusi harjoitus "
-                    android:textAlignment="textEnd"
+                    android:textAlignment="textStart"
                     android:textColor="@color/AskMeGraySettingsToggleButton"
                     android:textSize="24sp"
                     android:textStyle="normal"
@@ -142,19 +124,6 @@
                     app:strokeColor="@color/black"
                     app:strokeWidth="2dp" />
 
-                <ImageView
-                    android:id="@+id/imgNewExercise"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="Plus icon for new Exercise"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnNewExercise"
-                    app:layout_constraintVertical_bias="0"
-                    app:srcCompat="@android:drawable/ic_lock_lock" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

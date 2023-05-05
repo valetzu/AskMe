@@ -1,15 +1,15 @@
-package com.example.askme
+package com.example.askme.settings
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import com.example.askme.MainActivity
+import com.example.askme.R
 
 class SettingsScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_screen)
 
@@ -19,6 +19,4 @@ class SettingsScreen : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 }
