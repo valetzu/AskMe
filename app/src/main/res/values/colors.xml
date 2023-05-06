@@ -8,5 +8,7 @@
     <color name="AskMeGraySettingsToggleButton">#C8CDD1</color>
     <color name="AskMeRedWrongAnswer">#F06666</color>
     <color name="AskMeGreenCorrectAnswer">#27C11A</color>
+    <color name="AskMeNearlyCorrectAnswer">#FAB70C</color>
     <color name="AskMeFaintWhiteFinnishWord">#EBEFF2</color>
+
 </resources>

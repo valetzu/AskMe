@@ -8,7 +8,6 @@ import com.example.askme.MainActivity
 import com.example.askme.R
 
 class SettingsScreen : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_screen)

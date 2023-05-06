@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Exercise list -->
+    <!-- Resource name : Filename -->
+    <string name="TestExercise">exercisetest</string>
+    <string name="ENG_Exercise1">eng_exercise1</string>
+</resources>
