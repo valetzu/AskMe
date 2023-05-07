@@ -1,13 +1,17 @@
 package com.example.askme.exercise
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -46,6 +50,7 @@ class ExerciseMain : AppCompatActivity() {
         val buttonCheckAnswer = findViewById<Button>(R.id.btnCheckButton)!!
         val buttonContinue = findViewById<Button>(R.id.btnContinueButton)
         val wordFinnish = findViewById<TextView>(R.id.tvFinnishWord)
+
 
         //
         val tvRedBoxAnswer = findViewById<TextView>(R.id.tvWrongAnswerDescription)
@@ -106,7 +111,63 @@ class ExerciseMain : AppCompatActivity() {
                 results()
             }
         }
+
+        //Send button
+
+        fun sendMessage() {
+            hideKeyboard(this)
+            enteredAnswer = editTextAnswer.text.toString()
+            editTextAnswer.text.clear()
+            var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
+            when(percentageCorrect){
+                100.0 -> {
+                    rightAnswerAmount++
+                    tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
+                    buttonCheckAnswer.visibility = INVISIBLE
+                    cardViewRightAnswer.visibility = VISIBLE
+                    buttonContinue.visibility = VISIBLE
+                }
+                in nearlyCorrectThresholdPercentage..99.9 -> {
+                    nearlyCorrectAnswers++
+                    tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
+                    buttonCheckAnswer.visibility = INVISIBLE
+                    cardViewNearlyCorrectAnswer.visibility = VISIBLE
+                    buttonContinue.visibility = VISIBLE
+                }
+                else -> {
+                    wrongAnswerAmount++
+                    tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
+                    buttonCheckAnswer.visibility = INVISIBLE
+                    cardViewWrongAnswer.visibility = VISIBLE
+                    buttonContinue.visibility = VISIBLE
+                }
+            }
+        }
+
+        findViewById<EditText>(R.id.etEnglishWord).setOnEditorActionListener {v, etEnglishWord, event ->
+            return@setOnEditorActionListener when (etEnglishWord) {
+                EditorInfo.IME_ACTION_SEND -> {
+                    sendMessage()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        //Send button ends
     }
+
+    //Hides keyboard
+    private fun hideKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = activity.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    //
 
     private fun results(){
         val rAnswer = rightAnswerAmount.toInt()
@@ -297,4 +358,5 @@ class ExerciseMain : AppCompatActivity() {
         correctPercentage = (correctPercentage + sameCharsPercentage) / 2.0
         return correctPercentage
     }
+
 }
