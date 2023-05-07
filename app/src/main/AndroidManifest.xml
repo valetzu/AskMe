@@ -31,6 +31,14 @@
             android:label="ResultScreen"
             android:theme="@style/Theme.AskMe" />
         <activity
+            android:name=".settings.HelpScreen"
+            android:label="HelpScreen"
+            android:theme="@style/Theme.AskMe"/>
+        <activity
+            android:name=".settings.InfoScreen"
+            android:label="InfoScreen"
+            android:theme="@style/Theme.AskMe"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
