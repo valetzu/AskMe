@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore.Audio.Media
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
@@ -30,6 +32,9 @@ class ExerciseMain : AppCompatActivity() {
     private var wordPairList : MutableList<Pair<String, String>> = mutableListOf()
     var wordIndex = 0
 
+    private lateinit var mediaPlayerSuccess: MediaPlayer
+    private lateinit var mediaPlayerFail: MediaPlayer
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,9 @@ class ExerciseMain : AppCompatActivity() {
         wrongAnswerAmount = 0
         rightAnswerAmount = 0
         nearlyCorrectAnswers = 0
+
+        mediaPlayerSuccess = MediaPlayer.create(this, R.raw.success)
+        mediaPlayerFail = MediaPlayer.create(this, R.raw.fail)
 
         val cardViewRightAnswer = findViewById<CardView>(R.id.cvRightAnswer)!!
         val cardViewWrongAnswer = findViewById<CardView>(R.id.cvWrongAnswer)!!
@@ -72,6 +80,7 @@ class ExerciseMain : AppCompatActivity() {
             var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
             when(percentageCorrect){
                 100.0 -> {
+                    mediaPlayerSuccess.start()
                     rightAnswerAmount++
                     tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
                     buttonCheckAnswer.visibility = INVISIBLE
@@ -79,6 +88,7 @@ class ExerciseMain : AppCompatActivity() {
                     buttonContinue.visibility = VISIBLE
                 }
                 in nearlyCorrectThresholdPercentage..99.9 -> {
+                    mediaPlayerSuccess.start()
                     nearlyCorrectAnswers++
                     tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
                     buttonCheckAnswer.visibility = INVISIBLE
@@ -86,6 +96,7 @@ class ExerciseMain : AppCompatActivity() {
                     buttonContinue.visibility = VISIBLE
                 }
                 else -> {
+                    mediaPlayerFail.start()
                     wrongAnswerAmount++
                     tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
                     buttonCheckAnswer.visibility = INVISIBLE
@@ -120,6 +131,7 @@ class ExerciseMain : AppCompatActivity() {
             var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
             when(percentageCorrect){
                 100.0 -> {
+                    mediaPlayerSuccess.start()
                     rightAnswerAmount++
                     tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
                     buttonCheckAnswer.visibility = INVISIBLE
@@ -127,6 +139,7 @@ class ExerciseMain : AppCompatActivity() {
                     buttonContinue.visibility = VISIBLE
                 }
                 in nearlyCorrectThresholdPercentage..99.9 -> {
+                    mediaPlayerSuccess.start()
                     nearlyCorrectAnswers++
                     tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
                     buttonCheckAnswer.visibility = INVISIBLE
@@ -134,6 +147,7 @@ class ExerciseMain : AppCompatActivity() {
                     buttonContinue.visibility = VISIBLE
                 }
                 else -> {
+                    mediaPlayerFail.start()
                     wrongAnswerAmount++
                     tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
                     buttonCheckAnswer.visibility = INVISIBLE

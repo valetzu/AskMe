@@ -3,6 +3,7 @@ package com.example.askme.exercise
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.widget.Button
@@ -13,9 +14,13 @@ import com.example.askme.MainActivity
 import com.example.askme.R
 
 class ResultScreen : AppCompatActivity() {
+
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.result_screen)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.result)
 
        val sharedPref = getSharedPreferences("my_sf", Context.MODE_PRIVATE)
        val rightAnswerAmount = sharedPref.getInt("sf_rightAnswer", 0)
@@ -29,6 +34,7 @@ class ResultScreen : AppCompatActivity() {
         var answerAmount = rightAnswerAmount + wrongAnswerAmount
         var finalResult ="$rightAnswerAmount/$answerAmount"
 
+        mediaPlayer.start()
         rightAnswers.text = "Oikeita vastauksia " + rightAnswerAmount
         wrongAnswers.text = "Vääriä vastauksia " + wrongAnswerAmount
         resultComplete.text = "Kokonaistulos " + finalResult
