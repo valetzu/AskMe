@@ -8,6 +8,7 @@ import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.askme.MainActivity
 import com.example.askme.R
 
@@ -25,10 +26,7 @@ class ResultScreen : AppCompatActivity() {
         val resultComplete = findViewById<TextView>(R.id.tvResult)
         val returnButton = findViewById<Button>(R.id.btnReturn)
 
-        /*val wrongAnswerAmount = intent.getIntExtra("WRONGANSWERAMOUNT", 0)
-        val rightAnswerAmount = intent.getIntExtra("RIGHTANSWERAMOUNT", 0)*/
         var answerAmount = rightAnswerAmount + wrongAnswerAmount
-
         var finalResult ="$rightAnswerAmount/$answerAmount"
 
         rightAnswers.text = "Oikeita vastauksia " + rightAnswerAmount
@@ -39,5 +37,5 @@ class ResultScreen : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-        }
     }
+}

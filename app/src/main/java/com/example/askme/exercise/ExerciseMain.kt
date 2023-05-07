@@ -34,13 +34,13 @@ class ExerciseMain : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exercise_main)
-
         sf = getSharedPreferences("my_sf", MODE_PRIVATE)
         editor = sf.edit()
+        resetValuesInSF()
+
         wrongAnswerAmount = 0
         rightAnswerAmount = 0
         nearlyCorrectAnswers = 0
-
 
         val cardViewRightAnswer = findViewById<CardView>(R.id.cvRightAnswer)!!
         val cardViewWrongAnswer = findViewById<CardView>(R.id.cvWrongAnswer)!!
@@ -50,12 +50,10 @@ class ExerciseMain : AppCompatActivity() {
         val buttonCheckAnswer = findViewById<Button>(R.id.btnCheckButton)!!
         val buttonContinue = findViewById<Button>(R.id.btnContinueButton)
         val wordFinnish = findViewById<TextView>(R.id.tvFinnishWord)
-
-
-        //
         val tvRedBoxAnswer = findViewById<TextView>(R.id.tvWrongAnswerDescription)
         val tvGreenBoxAnswer = findViewById<TextView>(R.id.tvRightAnswerDescription)
         val tvYellowBoxAnswer = findViewById<TextView>(R.id.tvNearlyCorrectAnswerDescription)
+
         buttonExit.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
@@ -68,6 +66,7 @@ class ExerciseMain : AppCompatActivity() {
         var wordEnglishAnswer = wordPairList.get(wordIndex).second
             buttonCheckAnswer.text = "Tarkasta vastaus"
             buttonContinue.text = "Jatka"
+
         buttonCheckAnswer.setOnClickListener{
             enteredAnswer = editTextAnswer.text.toString()
             var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
@@ -97,6 +96,7 @@ class ExerciseMain : AppCompatActivity() {
         }
 
         buttonContinue.setOnClickListener{
+            Log.d("test", "Correct Answers: ${rightAnswerAmount}, Nearly correct answers: ${nearlyCorrectAnswers}, Wrong answers: ${wrongAnswerAmount}")
             cardViewRightAnswer.visibility = INVISIBLE
             cardViewNearlyCorrectAnswer.visibility = INVISIBLE
             cardViewWrongAnswer.visibility = INVISIBLE
@@ -113,7 +113,6 @@ class ExerciseMain : AppCompatActivity() {
         }
 
         //Send button
-
         fun sendMessage() {
             hideKeyboard(this)
             enteredAnswer = editTextAnswer.text.toString()
@@ -153,7 +152,6 @@ class ExerciseMain : AppCompatActivity() {
                 else -> false
             }
         }
-
         //Send button ends
     }
 
@@ -167,37 +165,44 @@ class ExerciseMain : AppCompatActivity() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    //
-
     private fun results(){
-        val rAnswer = rightAnswerAmount.toInt()
-        val wAnswer = wrongAnswerAmount.toInt()
-        editor.apply{
-            putInt("sf_rightAnswer", rAnswer)
-            putInt("sf_wrongAnswer", wAnswer)
-            commit()
-        }
+        saveValuesToSF()
         val intent = Intent(this, ResultScreen::class.java)
-        /*intent.putExtra("RIGHTANSWERAMOUNT", rightAnswerAmount)*/
-        /*intent.putExtra("WRONGANSWERAMOUNT", wrongAnswerAmount)*/
         startActivity(intent)
     }
     override fun onPause() {
         super.onPause()
-        val rAnswer = rightAnswerAmount.toInt()
-        val wAnswer = wrongAnswerAmount.toInt()
-        editor.apply{
-            putInt("sf_rightAnswer", rAnswer)
-            putInt("sf_wrongAnswer", wAnswer)
-            commit()
-        }
+        saveValuesToSF()
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+        resetValuesInSF()
     }
     override fun onResume(){
         super.onResume()
-        val resumeRightAnswer = sf.getInt("sf_rightAnswer", 0)
-        val resumeWrongAnswer = sf.getInt("sf_wrongAnswer", 0)
-        wrongAnswerAmount = resumeWrongAnswer
-        rightAnswerAmount = resumeRightAnswer
+        getValuesFromSF()
+    }
+
+    fun saveValuesToSF(){
+        editor.apply{
+            putInt("sf_rightAnswer", rightAnswerAmount)
+            putInt("sf_wrongAnswer", wrongAnswerAmount)
+            commit()
+        }
+    }
+
+    fun resetValuesInSF(){
+        editor.apply{
+            putInt("sf_rightAnswer", 0)
+            putInt("sf_wrongAnswer", 0)
+            commit()
+        }
+    }
+
+    fun getValuesFromSF(){
+        wrongAnswerAmount = sf.getInt("sf_rightAnswer", 0)
+        rightAnswerAmount = sf.getInt("sf_wrongAnswer", 0)
     }
     fun readExerciseFromResources() : MutableList<Pair<String, String>>{
         //TODO implement exercise file name parameter to be used in this function
@@ -208,7 +213,6 @@ class ExerciseMain : AppCompatActivity() {
         array.forEach{
             val pairAsArray = it.split(',')
             val pair = Pair<String, String>(pairAsArray[0], pairAsArray[1])
-            Log.d("test", "${pair}")
             tempWordPairList.add(pair)
         }
         return tempWordPairList
@@ -358,5 +362,4 @@ class ExerciseMain : AppCompatActivity() {
         correctPercentage = (correctPercentage + sameCharsPercentage) / 2.0
         return correctPercentage
     }
-
 }
