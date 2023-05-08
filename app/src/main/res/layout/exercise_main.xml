@@ -33,15 +33,32 @@
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvTopBar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/en1"
-                android:textSize="40sp" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/tvTopBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/en1"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/tvTopBarDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="16sp"
+                    android:text="@string/englannin_ykk_skappaleen_sanoja"
+                    android:textColor="@color/black"/>
+
+        </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -273,13 +290,13 @@
 
     <Button
         android:id="@+id/btnCheckButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
 
         android:backgroundTint="@color/AskMeYellowGeneral"
         android:text="@string/tarkasta_vastaus"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -289,19 +306,19 @@
 
 
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp"
+        app:strokeWidth="5dp"
 
         android:visibility="visible"/>
 
     <Button
         android:id="@+id/btnContinueButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
 
         android:backgroundTint="@color/AskMeYellowGeneral"
         android:text="Jatka"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -311,9 +328,8 @@
 
 
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp"
+        app:strokeWidth="5dp"
 
         android:visibility="invisible"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

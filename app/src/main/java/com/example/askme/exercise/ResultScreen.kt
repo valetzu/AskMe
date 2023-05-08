@@ -42,6 +42,8 @@ class ResultScreen : AppCompatActivity() {
         var answerAmount = rightAnswerAmount + wrongAnswerAmount + nearlyCorrectAnswerAmount
         var finalResult = 100f * (rightAnswerAmount + nearlyCorrectAnswerAmount).toFloat()/answerAmount.toFloat()
 
+        var wasFlipped = intent.getBooleanExtra("WASFLIPPED", false)
+
         mediaPlayer.start()
         rightAnswers.text = "Oikeita vastauksia $rightAnswerAmount"
         wrongAnswers.text = "Vääriä vastauksia $wrongAnswerAmount"
@@ -64,8 +66,12 @@ class ResultScreen : AppCompatActivity() {
         }
 
         reverseButton.setOnClickListener{
-            //TODO: miten saada tieto exerciseMainiin siitä että onkin reversed mode? shared preferences asetukset ehkä?
             val intent = Intent(this, ExerciseMain::class.java)
+            if(!wasFlipped){
+                intent.putExtra("FLIPPED",true)
+            }else{
+                intent.putExtra("FLIPPED", false)
+            }
             startActivity(intent)
         }
 

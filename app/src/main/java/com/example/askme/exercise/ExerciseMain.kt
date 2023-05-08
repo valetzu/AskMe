@@ -35,6 +35,8 @@ class ExerciseMain : AppCompatActivity() {
     private lateinit var mediaPlayerSuccess: MediaPlayer
     private lateinit var mediaPlayerFail: MediaPlayer
 
+    var flippedOrNot = false
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +63,13 @@ class ExerciseMain : AppCompatActivity() {
         val tvRedBoxAnswer = findViewById<TextView>(R.id.tvWrongAnswerDescription)
         val tvGreenBoxAnswer = findViewById<TextView>(R.id.tvRightAnswerDescription)
         val tvYellowBoxAnswer = findViewById<TextView>(R.id.tvNearlyCorrectAnswerDescription)
+        val tvAskingLanguage = findViewById<TextView>(R.id.tvEnglishLanguage)
+        val tvAnsweringLanguage = findViewById<TextView>(R.id.tvFinnishLanguage)
+
+        //
+
+        val courseName = intent.getStringExtra("COURSENAME")
+        flippedOrNot = intent.getBooleanExtra("FLIPPED", false)
 
         buttonExit.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
@@ -69,7 +78,14 @@ class ExerciseMain : AppCompatActivity() {
 
         var wordIndex = 0
         val nearlyCorrectThresholdPercentage = 75.0
-           wordPairList = readExerciseFromResources()
+           wordPairList = readExerciseFromResources(courseName.toString())
+
+        if(flippedOrNot){
+            wordPairList = getListWithFlippedLanguages(wordPairList)
+            tvAskingLanguage.text = "Finnish"
+            tvAnsweringLanguage.text = "English"
+        }
+
             wordFinnish.text = wordPairList.get(wordIndex).first
         var wordEnglishAnswer = wordPairList.get(wordIndex).second
             buttonCheckAnswer.text = "Tarkasta vastaus"
@@ -182,6 +198,9 @@ class ExerciseMain : AppCompatActivity() {
     private fun results(){
         saveValuesToSF()
         val intent = Intent(this, ResultScreen::class.java)
+        if (flippedOrNot){
+            intent.putExtra("WASFLIPPED", true)
+        }
         startActivity(intent)
     }
     override fun onPause() {
@@ -222,9 +241,10 @@ class ExerciseMain : AppCompatActivity() {
         nearlyCorrectAnswers = sf.getInt("sf_nearlyCorrectAnswer", 0)
     }
 
-    fun readExerciseFromResources() : MutableList<Pair<String, String>>{
-        //TODO implement exercise file name parameter to be used in this function
-        // currently hardcoded resource as "eng_exercise1"
+    fun readExerciseFromResources(courseName : String) : MutableList<Pair<String, String>>{
+
+        //TODO The name of the course clicked in chooseExercise is now being carried here in the courseName variable
+
         val resources = getResources()
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
         val array = resources.getStringArray(R.array.eng_exercise1)

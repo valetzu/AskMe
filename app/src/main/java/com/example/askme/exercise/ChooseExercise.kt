@@ -60,6 +60,7 @@ class ChooseExercise : AppCompatActivity() {
 
         if (course.name == "EN1"){
             val intent = Intent(this, ExerciseMain::class.java)
+            intent.putExtra("COURSENAME", course.name)
             startActivity(intent)
         }else{
             Toast.makeText(
