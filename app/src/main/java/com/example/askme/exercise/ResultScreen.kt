@@ -15,6 +15,7 @@ import com.example.askme.R
 
 class ResultScreen : AppCompatActivity() {
 
+    private lateinit var editor: SharedPreferences.Editor
     private lateinit var mediaPlayer: MediaPlayer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,23 +26,54 @@ class ResultScreen : AppCompatActivity() {
        val sharedPref = getSharedPreferences("my_sf", Context.MODE_PRIVATE)
        val rightAnswerAmount = sharedPref.getInt("sf_rightAnswer", 0)
        val wrongAnswerAmount = sharedPref.getInt("sf_wrongAnswer", 0)
+        val nearlyCorrectAnswerAmount = sharedPref.getInt("sf_nearlyCorrectAnswer", 0)
+        val previousPersonalBest = sharedPref.getFloat("sf_personalBest", 0.0f)
+        editor = sharedPref.edit()
 
         val rightAnswers = findViewById<TextView>(R.id.tvRightAnswerAmount)
         val wrongAnswers = findViewById<TextView>(R.id.tvWrongAnswerAmount)
+        val nearlyCorrectAnswers = findViewById<TextView>(R.id.tvNearlyCorrectAnswerAmount)
         val resultComplete = findViewById<TextView>(R.id.tvResult)
+        val tvPersonalBest = findViewById<TextView>(R.id.tvPersonalBest)
         val returnButton = findViewById<Button>(R.id.btnReturn)
+        val reverseButton = findViewById<Button>(R.id.btnReverse)
+        val repeatButton = findViewById<Button>(R.id.btnRepeat)
 
-        var answerAmount = rightAnswerAmount + wrongAnswerAmount
-        var finalResult ="$rightAnswerAmount/$answerAmount"
+        var answerAmount = rightAnswerAmount + wrongAnswerAmount + nearlyCorrectAnswerAmount
+        var finalResult = 100f * (rightAnswerAmount + nearlyCorrectAnswerAmount).toFloat()/answerAmount.toFloat()
 
         mediaPlayer.start()
-        rightAnswers.text = "Oikeita vastauksia " + rightAnswerAmount
-        wrongAnswers.text = "Vääriä vastauksia " + wrongAnswerAmount
-        resultComplete.text = "Kokonaistulos " + finalResult
+        rightAnswers.text = "Oikeita vastauksia $rightAnswerAmount"
+        wrongAnswers.text = "Vääriä vastauksia $wrongAnswerAmount"
+        nearlyCorrectAnswers.text = "Melkein oikein $nearlyCorrectAnswerAmount"
+        resultComplete.text = "Kokonaistulos $finalResult %"
+        if(finalResult > previousPersonalBest){
+            editor.apply{
+                putFloat("sf_personalBest", finalResult)
+                commit()
+            }
+            tvPersonalBest.text = "Oma ennätys $finalResult %"
+        } else {
+            tvPersonalBest.text = "Oma ennätys $previousPersonalBest %"
+        }
+
+
+        repeatButton.setOnClickListener{
+            val intent = Intent(this, ExerciseMain::class.java)
+            startActivity(intent)
+        }
+
+        reverseButton.setOnClickListener{
+            //TODO: miten saada tieto exerciseMainiin siitä että onkin reversed mode? shared preferences asetukset ehkä?
+            val intent = Intent(this, ExerciseMain::class.java)
+            startActivity(intent)
+        }
 
         returnButton.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+
     }
 }

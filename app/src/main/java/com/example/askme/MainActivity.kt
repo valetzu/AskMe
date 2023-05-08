@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonNewExercise.setOnClickListener{
             Toast.makeText(this@MainActivity,
-                "Feature is currently locked. Coming soon!",
+                "This feature is not available yet",
                 Toast.LENGTH_SHORT
             ).show()
         }

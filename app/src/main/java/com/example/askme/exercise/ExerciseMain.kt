@@ -202,6 +202,7 @@ class ExerciseMain : AppCompatActivity() {
         editor.apply{
             putInt("sf_rightAnswer", rightAnswerAmount)
             putInt("sf_wrongAnswer", wrongAnswerAmount)
+            putInt("sf_nearlyCorrectAnswer", nearlyCorrectAnswers)
             commit()
         }
     }
@@ -210,6 +211,7 @@ class ExerciseMain : AppCompatActivity() {
         editor.apply{
             putInt("sf_rightAnswer", 0)
             putInt("sf_wrongAnswer", 0)
+            putInt("sf_nearlyCorrectAnswer", 0)
             commit()
         }
     }
@@ -217,7 +219,9 @@ class ExerciseMain : AppCompatActivity() {
     fun getValuesFromSF(){
         wrongAnswerAmount = sf.getInt("sf_rightAnswer", 0)
         rightAnswerAmount = sf.getInt("sf_wrongAnswer", 0)
+        nearlyCorrectAnswers = sf.getInt("sf_nearlyCorrectAnswer", 0)
     }
+
     fun readExerciseFromResources() : MutableList<Pair<String, String>>{
         //TODO implement exercise file name parameter to be used in this function
         // currently hardcoded resource as "eng_exercise1"

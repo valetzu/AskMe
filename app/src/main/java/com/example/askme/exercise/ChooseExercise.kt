@@ -13,9 +13,9 @@ import com.example.askme.R
 class ChooseExercise : AppCompatActivity() {
 
     private val courseList = listOf<Course>(
-        Course("En 1"),
-        Course("En 2"),
-        Course("Swe 3")
+        Course("EN1"),
+        Course("EN2"),
+        Course("SWE3")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class ChooseExercise : AppCompatActivity() {
         uploadExerciseButton.setOnClickListener{
             Toast.makeText(
                 this@ChooseExercise,
-                "Not available yet",
+                "This feature is not available yet",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -48,7 +48,7 @@ class ChooseExercise : AppCompatActivity() {
         createExerciseButton.setOnClickListener{
             Toast.makeText(
                 this@ChooseExercise,
-                "Not available yet",
+                "This feature is not available yet",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -58,7 +58,7 @@ class ChooseExercise : AppCompatActivity() {
 
     private fun listItemClicked(course: Course){
 
-        if (course.name == "En 1"){
+        if (course.name == "EN1"){
             val intent = Intent(this, ExerciseMain::class.java)
             startActivity(intent)
         }else{

@@ -9,25 +9,30 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/AskMeYellowGeneral"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/llItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/AskMeYellowGeneral">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvtItem"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/AskMeYellowGeneral"
+                android:drawableRight="@drawable/arrow_right"
                 android:text="@string/en_1"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +41,16 @@
                 app:strokeColor="@color/black"
                 app:strokeWidth="3sp" />
 
+            <TextView
+                android:id="@+id/tvExerciseDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/AskMeYellowGeneral"
+                android:text="Englannin kurssin 1 kertaus"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
