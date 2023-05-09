@@ -5,9 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore.Audio.Media
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
@@ -17,6 +15,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.askme.MainActivity
 import com.example.askme.R
@@ -27,6 +27,9 @@ class ExerciseMain : AppCompatActivity() {
     var wrongAnswerAmount = 0
     var nearlyCorrectAnswers = 0
     var enteredAnswer = ""
+    var courseFileName = "eng_exercise1"
+    var courseName = "DefaultValue"
+    var courseDesc = "DefaultValue"
     private lateinit var sf:SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var wordPairList : MutableList<Pair<String, String>> = mutableListOf()
@@ -65,27 +68,34 @@ class ExerciseMain : AppCompatActivity() {
         val tvYellowBoxAnswer = findViewById<TextView>(R.id.tvNearlyCorrectAnswerDescription)
         val tvAskingLanguage = findViewById<TextView>(R.id.tvEnglishLanguage)
         val tvAnsweringLanguage = findViewById<TextView>(R.id.tvFinnishLanguage)
+        val tvExerciseProgress = findViewById<TextView>(R.id.tvExerciseProgress)
 
-        //
+        val tvCourseName = findViewById<TextView>(R.id.tvCourseName)
+        val tvCourseDesc = findViewById<TextView>(R.id.tvTopBarDesc)
 
-        val courseName = intent.getStringExtra("COURSENAME")
+        courseFileName = sf.getString("sf_coursefilename", "eng_exercise1").toString()
+        courseName = sf.getString("sf_coursename", "eng_exercise1").toString()
+        courseDesc = sf.getString("sf_coursedesc", "eng_exercise1").toString()
+
+        tvCourseName.text = courseName
+        tvCourseDesc.text = courseDesc
         flippedOrNot = intent.getBooleanExtra("FLIPPED", false)
 
         buttonExit.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
-
+        var exerciseProgress = 1
         var wordIndex = 0
         val nearlyCorrectThresholdPercentage = 75.0
-           wordPairList = readExerciseFromResources(courseName.toString())
+           wordPairList = readExerciseFromResources(courseFileName.toString())
 
         if(flippedOrNot){
             wordPairList = getListWithFlippedLanguages(wordPairList)
             tvAskingLanguage.text = "Finnish"
             tvAnsweringLanguage.text = "English"
         }
-
+        tvExerciseProgress.text = "$exerciseProgress / ${wordPairList.size}"
             wordFinnish.text = wordPairList.get(wordIndex).first
         var wordEnglishAnswer = wordPairList.get(wordIndex).second
             buttonCheckAnswer.text = "Tarkasta vastaus"
@@ -93,33 +103,38 @@ class ExerciseMain : AppCompatActivity() {
 
         buttonCheckAnswer.setOnClickListener{
             enteredAnswer = editTextAnswer.text.toString()
-            var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
-            when(percentageCorrect){
-                100.0 -> {
-                    mediaPlayerSuccess.start()
-                    rightAnswerAmount++
-                    tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
-                    buttonCheckAnswer.visibility = INVISIBLE
-                    cardViewRightAnswer.visibility = VISIBLE
-                    buttonContinue.visibility = VISIBLE
-                }
-                in nearlyCorrectThresholdPercentage..99.9 -> {
-                    mediaPlayerSuccess.start()
-                    nearlyCorrectAnswers++
-                    tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
-                    buttonCheckAnswer.visibility = INVISIBLE
-                    cardViewNearlyCorrectAnswer.visibility = VISIBLE
-                    buttonContinue.visibility = VISIBLE
-                }
-                else -> {
-                    mediaPlayerFail.start()
-                    wrongAnswerAmount++
-                    tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
-                    buttonCheckAnswer.visibility = INVISIBLE
-                    cardViewWrongAnswer.visibility = VISIBLE
-                    buttonContinue.visibility = VISIBLE
+            if(enteredAnswer.length == 0){
+                Toast.makeText(this@ExerciseMain, "Input field is empty. Type a translation!", Toast.LENGTH_LONG).show()
+            } else {
+                var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
+                when(percentageCorrect){
+                    100.0 -> {
+                        mediaPlayerSuccess.start()
+                        rightAnswerAmount++
+                        tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
+                        buttonCheckAnswer.visibility = INVISIBLE
+                        cardViewRightAnswer.visibility = VISIBLE
+                        buttonContinue.visibility = VISIBLE
+                    }
+                    in nearlyCorrectThresholdPercentage..99.9 -> {
+                        mediaPlayerSuccess.start()
+                        nearlyCorrectAnswers++
+                        tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
+                        buttonCheckAnswer.visibility = INVISIBLE
+                        cardViewNearlyCorrectAnswer.visibility = VISIBLE
+                        buttonContinue.visibility = VISIBLE
+                    }
+                    else -> {
+                        mediaPlayerFail.start()
+                        wrongAnswerAmount++
+                        tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
+                        buttonCheckAnswer.visibility = INVISIBLE
+                        cardViewWrongAnswer.visibility = VISIBLE
+                        buttonContinue.visibility = VISIBLE
+                    }
                 }
             }
+
         }
 
         buttonContinue.setOnClickListener{
@@ -130,6 +145,8 @@ class ExerciseMain : AppCompatActivity() {
             editTextAnswer.text.clear()
             wordIndex++
             if(wordIndex < wordPairList.size){
+                exerciseProgress++
+                tvExerciseProgress.text = "$exerciseProgress / ${wordPairList.size}"
                 buttonContinue.visibility = INVISIBLE
                 buttonCheckAnswer.visibility = VISIBLE
                 wordFinnish.text = wordPairList.get(wordIndex).first
@@ -144,31 +161,35 @@ class ExerciseMain : AppCompatActivity() {
             hideKeyboard(this)
             enteredAnswer = editTextAnswer.text.toString()
             editTextAnswer.text.clear()
-            var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
-            when(percentageCorrect){
-                100.0 -> {
-                    mediaPlayerSuccess.start()
-                    rightAnswerAmount++
-                    tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
-                    buttonCheckAnswer.visibility = INVISIBLE
-                    cardViewRightAnswer.visibility = VISIBLE
-                    buttonContinue.visibility = VISIBLE
-                }
-                in nearlyCorrectThresholdPercentage..99.9 -> {
-                    mediaPlayerSuccess.start()
-                    nearlyCorrectAnswers++
-                    tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
-                    buttonCheckAnswer.visibility = INVISIBLE
-                    cardViewNearlyCorrectAnswer.visibility = VISIBLE
-                    buttonContinue.visibility = VISIBLE
-                }
-                else -> {
-                    mediaPlayerFail.start()
-                    wrongAnswerAmount++
-                    tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
-                    buttonCheckAnswer.visibility = INVISIBLE
-                    cardViewWrongAnswer.visibility = VISIBLE
-                    buttonContinue.visibility = VISIBLE
+            if(enteredAnswer.length == 0){
+                Toast.makeText(this@ExerciseMain, "Input field is empty. Type a translation!", Toast.LENGTH_LONG).show()
+            } else {
+                var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
+                when(percentageCorrect){
+                    100.0 -> {
+                        mediaPlayerSuccess.start()
+                        rightAnswerAmount++
+                        tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
+                        buttonCheckAnswer.visibility = INVISIBLE
+                        cardViewRightAnswer.visibility = VISIBLE
+                        buttonContinue.visibility = VISIBLE
+                    }
+                    in nearlyCorrectThresholdPercentage..99.9 -> {
+                        mediaPlayerSuccess.start()
+                        nearlyCorrectAnswers++
+                        tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
+                        buttonCheckAnswer.visibility = INVISIBLE
+                        cardViewNearlyCorrectAnswer.visibility = VISIBLE
+                        buttonContinue.visibility = VISIBLE
+                    }
+                    else -> {
+                        mediaPlayerFail.start()
+                        wrongAnswerAmount++
+                        tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
+                        buttonCheckAnswer.visibility = INVISIBLE
+                        cardViewWrongAnswer.visibility = VISIBLE
+                        buttonContinue.visibility = VISIBLE
+                    }
                 }
             }
         }
@@ -239,15 +260,16 @@ class ExerciseMain : AppCompatActivity() {
         wrongAnswerAmount = sf.getInt("sf_rightAnswer", 0)
         rightAnswerAmount = sf.getInt("sf_wrongAnswer", 0)
         nearlyCorrectAnswers = sf.getInt("sf_nearlyCorrectAnswer", 0)
+        courseFileName = sf.getString("sf_coursefilename", "eng_exercise1").toString()
+        courseName = sf.getString("sf_coursename", "eng_exercise1").toString()
+        courseDesc = sf.getString("sf_coursedesc", "eng_exercise1").toString()
     }
 
-    fun readExerciseFromResources(courseName : String) : MutableList<Pair<String, String>>{
-
-        //TODO The name of the course clicked in chooseExercise is now being carried here in the courseName variable
-
-        val resources = getResources()
+    fun readExerciseFromResources(courseFileName : String) : MutableList<Pair<String, String>>{
+        val resourceId = getResources().getIdentifier(courseFileName, "array", packageName)
+        Log.d("wat", "id is $resourceId, courseFileName is $courseFileName")
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
-        val array = resources.getStringArray(R.array.eng_exercise1)
+        val array = resources.getStringArray(resourceId)
         array.forEach{
             val pairAsArray = it.split(',')
             val pair = Pair<String, String>(pairAsArray[0], pairAsArray[1])

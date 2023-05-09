@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eng_exercise2">
+            <!-- ENG,FIN -->
+        <item>mansikka,a strawberry</item>
+		<item>vadelma,a raspberry</item>
+		<item>mustikka,a blueberry</item>
+		<item>herukka,a currant</item>
+		<item>karviainen,a gooseberry</item>
+		<item>puolukka,a lingonberry</item>
+		<item>viinimarja,a grape</item>
+		<item>omena,an apple</item>
+		<item>päärynä,a pear</item>
+		<item>banaani,a banana</item>
+        <!-- Add more string pairs if needed -->
+    </string-array>
+</resources>

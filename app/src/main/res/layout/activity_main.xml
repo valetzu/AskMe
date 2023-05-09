@@ -10,125 +10,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:gravity="center_horizontal|top"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <ImageView
+            android:id="@+id/imgAsky"
             android:layout_width="match_parent"
-            android:layout_height="426dp">
+            android:layout_height="404dp"
+            android:contentDescription="AskMeLogo"
+            app:srcCompat="@drawable/asky_logo" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btnOpenExercise"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/AskMeYellowGeneral"
+            android:drawableLeft="@drawable/book_open"
+            android:text=" Avaa harjoitus"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
 
-                <ImageView
-                    android:id="@+id/imgAsky"
-                    android:layout_width="426dp"
-                    android:layout_height="418dp"
-                    android:contentDescription="AskMeLogo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/asky_logo" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnNewExercise"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/AskMeGraySettingsButton"
+            android:drawableLeft="@android:drawable/ic_lock_lock"
+            android:paddingLeft="35dp"
+            android:text="Luo uusi harjoitus "
+            android:textAlignment="textStart"
+            android:textColor="@color/AskMeGraySettingsToggleButton"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            app:cornerRadius="10dp"
+            app:iconPadding="15dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/btnOpenExercise"
-                    android:layout_width="300dp"
-                    android:layout_height="75dp"
-                    android:backgroundTint="@color/AskMeYellowGeneral"
-                    android:drawableLeft="@drawable/book_open"
-                    android:text=" Avaa harjoitus"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="normal"
-                    app:cornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/btnSettings"
-                    android:layout_width="300dp"
-                    android:layout_height="75dp"
-                    android:backgroundTint="@color/AskMeGraySettingsButton"
-                    android:drawableLeft="@drawable/settings_icon"
-                    android:text="Asetukset      "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="normal"
-                    app:cornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/btnNewExercise"
-                    android:layout_width="300dp"
-                    android:layout_height="75dp"
-                    android:backgroundTint="@color/AskMeGraySettingsButton"
-                    android:drawableLeft="@android:drawable/ic_lock_lock"
-                    android:paddingLeft="40dp"
-                    android:text="Luo uusi harjoitus "
-                    android:textAlignment="textStart"
-                    android:textColor="@color/AskMeGraySettingsToggleButton"
-                    android:textSize="24sp"
-                    android:textStyle="normal"
-                    app:cornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.495"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="2dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="300dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/AskMeGraySettingsButton"
+            android:drawableLeft="@drawable/settings_icon"
+            android:text="Asetukset      "
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            app:cornerRadius="10dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp" />
 
     </LinearLayout>
 

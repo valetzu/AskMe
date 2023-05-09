@@ -1,6 +1,7 @@
 package com.example.askme.exercise
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -11,16 +12,21 @@ import com.example.askme.MainActivity
 import com.example.askme.R
 
 class ChooseExercise : AppCompatActivity() {
-
+    private lateinit var sf: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     private val courseList = listOf<Course>(
-        Course("EN1"),
-        Course("EN2"),
-        Course("SWE3")
+        //TODO: fileName is critical! app does not yet check whether it actually exists
+        Course("EN1", "Demo course for preview", "eng_exercise1"),
+        Course("EN2", "Demo course 2 for preview", "eng_exercise2"),
+        Course("SWE3", "Demo course 3 for preview", "swe_exercise1")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.choose_exercise)
+
+        sf = getSharedPreferences("my_sf", MODE_PRIVATE)
+        editor = sf.edit()
 
         val exitButton = findViewById<Button>(R.id.btnExit)
         val uploadExerciseButton = findViewById<Button>(R.id.btnUploadExercise)
@@ -55,19 +61,14 @@ class ChooseExercise : AppCompatActivity() {
 
 
     }
-
     private fun listItemClicked(course: Course){
-
-        if (course.name == "EN1"){
             val intent = Intent(this, ExerciseMain::class.java)
-            intent.putExtra("COURSENAME", course.name)
+            editor.apply{
+                putString("sf_coursename", course.name)
+                putString("sf_coursedesc", course.description)
+                putString("sf_coursefilename", course.fileName)
+                commit()
+            }
             startActivity(intent)
-        }else{
-            Toast.makeText(
-                this@ChooseExercise,
-                "This exercise is not available yet",
-                Toast.LENGTH_LONG
-            ).show()
-        }
     }
 }

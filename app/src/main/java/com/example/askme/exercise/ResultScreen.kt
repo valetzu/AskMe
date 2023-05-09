@@ -48,15 +48,17 @@ class ResultScreen : AppCompatActivity() {
         rightAnswers.text = "Oikeita vastauksia $rightAnswerAmount"
         wrongAnswers.text = "Vääriä vastauksia $wrongAnswerAmount"
         nearlyCorrectAnswers.text = "Melkein oikein $nearlyCorrectAnswerAmount"
-        resultComplete.text = "Kokonaistulos $finalResult %"
+        val finalResultFormated = String.format("%.1f", finalResult)
+        resultComplete.text = "Kokonaistulos $finalResultFormated %"
         if(finalResult > previousPersonalBest){
             editor.apply{
                 putFloat("sf_personalBest", finalResult)
                 commit()
             }
-            tvPersonalBest.text = "Oma ennätys $finalResult %"
+            tvPersonalBest.text = "Oma ennätys $finalResultFormated %"
         } else {
-            tvPersonalBest.text = "Oma ennätys $previousPersonalBest %"
+            val pbFormated = String.format("%.1f", previousPersonalBest)
+            tvPersonalBest.text = "Oma ennätys $pbFormated %"
         }
 
 

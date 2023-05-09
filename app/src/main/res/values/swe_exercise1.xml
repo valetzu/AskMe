@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="swe_exercise1">
+            <!-- FIN,SWE -->
+        <item>omena,ett äpple</item>
+    <item>banaani,en banan</item>
+    <item>appelsiini,en apelsin</item>
+    <item>sitruuna,en citron</item>
+    <item>greippi,en grapefrukt</item>
+    <item>kiwi,ett kiwi</item>
+    <item>ananas,ett ananas</item>
+    <item>mansikka,en jordgubbe</item>
+    <item>vadelma,en hallon</item>
+    <item>mustikka,en blåbär</item>
+        <!-- Add more string pairs if needed -->
+    </string-array>
+</resources>

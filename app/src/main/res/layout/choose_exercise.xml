@@ -27,21 +27,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/AskMeYellowGeneral"
-                android:text="@string/x"
+                android:drawableLeft="@drawable/close_icon"
                 android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:textSize="40sp" />
 
             <TextView
-                android:id="@+id/tvTopBar"
+                android:id="@+id/tvExerciseProgress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:text="Avaa harjoitus"
                 android:textColor="@color/black"
-                android:textSize="37sp"
-                android:textStyle="bold" />
+                android:textSize="37sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -49,99 +47,47 @@
         android:id="@+id/rvExercises"
         android:layout_width="match_parent"
         android:layout_height="440dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvTopBar" />
+        app:layout_constraintTop_toBottomOf="@+id/cvTopBar">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="@color/AskMeYellowGeneral"
-        android:backgroundTint="@color/AskMeYellowGeneral"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/cvNewExercise"
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btnCreateNewExercise"
+        android:layout_width="360dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/AskMeGraySettingsToggleButton"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
+        android:text="Luo uusi harjoitus"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnUploadExercise"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="@color/AskMeYellowGeneral"
-                app:srcCompat="@drawable/plus_box" />
-
-            <Button
-                android:id="@+id/btnUploadExercise"
-                android:layout_width="300dp"
-                android:layout_height="75dp"
-                android:backgroundTint="@color/AskMeYellowGeneral"
-                android:text="Luo uusi harjoitus"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvNewExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="@color/AskMeYellowGeneral"
-        android:backgroundTint="@color/AskMeYellowGeneral"
-        app:cardCornerRadius="15dp"
+    <Button
+        android:id="@+id/btnUploadExercise"
+        android:layout_width="360dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/AskMeGraySettingsToggleButton"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
+        android:text="Tuo harjoitus"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/black"
-        app:strokeWidth="10dp">
+        app:strokeWidth="2dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/AskMeYellowGeneral"
-                app:srcCompat="@drawable/download" />
-
-            <Button
-                android:id="@+id/btnCreateNewExercise"
-                android:layout_width="300dp"
-                android:layout_height="75dp"
-                android:backgroundTint="@color/AskMeYellowGeneral"
-                android:text="Tuo harjoitus"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
