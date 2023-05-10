@@ -96,7 +96,7 @@
         <Button
             android:id="@+id/btnRepeat"
             android:layout_width="335dp"
-            android:layout_height="75dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/AskMeYellowGeneral"
             android:drawableLeft="@drawable/reset_icon"
             android:paddingLeft="32dp"
@@ -112,7 +112,7 @@
         <Button
             android:id="@+id/btnReverse"
             android:layout_width="335dp"
-            android:layout_height="75dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/AskMeYellowGeneral"
             android:drawableLeft="@drawable/shuffle_icon"
             android:text="Kysy toisinpäin"
@@ -127,7 +127,7 @@
         <Button
             android:id="@+id/btnReturn"
             android:layout_width="335dp"
-            android:layout_height="75dp"
+            android:layout_height="60dp"
             android:backgroundTint="@color/AskMeGraySettingsButton"
 
 
