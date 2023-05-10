@@ -16,11 +16,11 @@ class ChooseExercise : AppCompatActivity() {
     private lateinit var editor: SharedPreferences.Editor
     private val courseList = listOf<Course>(
         //TODO: fileName is critical! app does not yet check whether it actually exists
-        Course("EN1", "Demo course 1 for preview", "eng_exercise1"),
-        Course("EN2", "Demo course 2 for preview", "eng_exercise2"),
-        Course("SWE1", "Demo course 3 for preview", "swe_exercise1"),
-        Course("EN3", "Demo course 4 for preview", "eng_exercise3"),
-        Course("EN4", "Demo course 5 for preview", "eng_exercise4")
+        Course("EN1", "Demo course 1 for preview", "eng_exercise1", "english"),
+        Course("EN2", "Demo course 2 for preview", "eng_exercise2", "english"),
+        Course("SWE1", "Demo course 3 for preview", "swe_exercise1", "swedish"),
+        Course("EN3", "Demo course 4 for preview", "eng_exercise3", "english"),
+        Course("EN4", "Demo course 5 for preview", "eng_exercise4", "english")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
