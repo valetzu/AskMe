@@ -30,6 +30,7 @@ class ExerciseMain : AppCompatActivity() {
     var courseFileName = "eng_exercise1"
     var courseName = "DefaultValue"
     var courseDesc = "DefaultValue"
+    var courseLang = "english"
     private lateinit var sf:SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var wordPairList : MutableList<Pair<String, String>> = mutableListOf()
@@ -76,6 +77,7 @@ class ExerciseMain : AppCompatActivity() {
         courseFileName = sf.getString("sf_coursefilename", "eng_exercise1").toString()
         courseName = sf.getString("sf_coursename", "eng_exercise1").toString()
         courseDesc = sf.getString("sf_coursedesc", "eng_exercise1").toString()
+        courseLang = sf.getString("sf_courselanguage", "english").toString()
 
         tvCourseName.text = courseName
         tvCourseDesc.text = courseDesc
@@ -90,11 +92,21 @@ class ExerciseMain : AppCompatActivity() {
         val nearlyCorrectThresholdPercentage = 75.0
            wordPairList = readExerciseFromResources(courseFileName.toString())
 
+        if (courseLang == "swedish"){
+            tvAskingLanguage.text = "ruotsi"
+        }
+
         if(flippedOrNot){
             wordPairList = getListWithFlippedLanguages(wordPairList)
-            tvAskingLanguage.text = "Finnish"
-            tvAnsweringLanguage.text = "English"
+            if(courseLang == "english") {
+                tvAskingLanguage.text = "Finnish"
+                tvAnsweringLanguage.text = "English"
+            }else if(courseLang == "swedish"){
+                tvAskingLanguage.text = "Finska"
+                tvAnsweringLanguage.text = "Swenska"
+            }
         }
+
         tvExerciseProgress.text = "$exerciseProgress / ${wordPairList.size}"
             wordFinnish.text = wordPairList.get(wordIndex).first
         var wordEnglishAnswer = wordPairList.get(wordIndex).second
@@ -106,6 +118,13 @@ class ExerciseMain : AppCompatActivity() {
             if(enteredAnswer.length == 0){
                 Toast.makeText(this@ExerciseMain, "Input field is empty. Type a translation!", Toast.LENGTH_LONG).show()
             } else {
+
+                // Stops user from modifying the answer
+
+                editTextAnswer.setEnabled(false)
+
+                //
+
                 var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
                 when(percentageCorrect){
                     100.0 -> {
@@ -138,6 +157,13 @@ class ExerciseMain : AppCompatActivity() {
         }
 
         buttonContinue.setOnClickListener{
+
+            // Resets editText
+
+            editTextAnswer.setEnabled(true)
+
+            //
+
             Log.d("test", "Correct Answers: ${rightAnswerAmount}, Nearly correct answers: ${nearlyCorrectAnswers}, Wrong answers: ${wrongAnswerAmount}")
             cardViewRightAnswer.visibility = INVISIBLE
             cardViewNearlyCorrectAnswer.visibility = INVISIBLE
@@ -160,10 +186,16 @@ class ExerciseMain : AppCompatActivity() {
         fun sendMessage() {
             hideKeyboard(this)
             enteredAnswer = editTextAnswer.text.toString()
-            editTextAnswer.text.clear()
             if(enteredAnswer.length == 0){
                 Toast.makeText(this@ExerciseMain, "Input field is empty. Type a translation!", Toast.LENGTH_LONG).show()
             } else {
+
+                // Stops user from modifying the answer
+
+                editTextAnswer.setEnabled(false)
+
+                //
+
                 var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
                 when(percentageCorrect){
                     100.0 -> {

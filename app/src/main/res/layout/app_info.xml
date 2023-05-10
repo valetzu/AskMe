@@ -51,7 +51,7 @@
         android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/info_text"
+        android:text="@string/sovelluksen_ovat_kehitt_neet_valtteri_ja_artturi_nse_on_megahyv_sovellus"
         android:textSize="25sp"/>
 
     </ScrollView>
