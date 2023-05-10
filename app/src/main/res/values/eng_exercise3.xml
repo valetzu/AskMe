@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eng_exercise3">
+            <!-- ENG,FIN -->
+        <item>omena,an apple</item>
+        <item>auto,a car</item>
+        <item>kissa,a cat</item>
+        <item>koira,a dog</item>
+        <item>talo,a house</item>
+        <item>kynä,a pen</item>
+        <item>puu,a tree</item>
+        <item>tietokone,a computer</item>
+        <item>kahvi,coffee</item>
+        <item>kaupunki,a city</item>
+        <!-- Add more string pairs if needed -->
+    </string-array>
+</resources>
