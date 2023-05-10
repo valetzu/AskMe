@@ -1,6 +1,7 @@
 package com.example.askme.settings
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,15 +11,25 @@ import com.example.askme.MainActivity
 import com.example.askme.R
 
 class SettingsScreen : AppCompatActivity() {
+
+    private lateinit var sf: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings_screen)
+        sf = getSharedPreferences("my_sf", MODE_PRIVATE)
+        editor = sf.edit()
 
+        var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
+        var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
         val buttonExit = findViewById<Button>(R.id.btnExit)
         val buttonInfo = findViewById<Button>(R.id.btnInfo)
         val buttonHelp = findViewById<Button>(R.id.btnHelp)
         val darkModeSwitch = findViewById<Switch>(R.id.swEnableDarkMode)
         val muteSwitch = findViewById<Switch>(R.id.swEnableSound)
+
+        darkModeSwitch.isChecked = darkmodeEnabled
+        muteSwitch.isChecked = mutedEnabled
 
         buttonExit.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
@@ -36,15 +47,23 @@ class SettingsScreen : AppCompatActivity() {
         }
 
         darkModeSwitch?.setOnCheckedChangeListener({ _ , isChecked ->
-            val message = if (isChecked) "Dark mode:ON" else "Dark mode:OFF"
+            val message = if (isChecked) "Dark mode enabled" else "Dark mode disabled"
             Toast.makeText(this@SettingsScreen, message,
             Toast.LENGTH_SHORT).show()
+            editor.apply{
+                putBoolean("sf_darkmode_enabled", isChecked)
+                commit()
+            }
         })
 
         muteSwitch?.setOnCheckedChangeListener({ _ , isChecked ->
-            val message = if (isChecked) "Muted" else "Unmuted"
+            val message = if (isChecked) "Sound Muted" else "Sound Unmuted"
             Toast.makeText(this@SettingsScreen, message,
                 Toast.LENGTH_SHORT).show()
+            editor.apply{
+                putBoolean("sf_muted_enabled", isChecked)
+                commit()
+            }
         })
     }
 }
