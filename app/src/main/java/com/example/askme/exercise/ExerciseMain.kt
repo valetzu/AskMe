@@ -68,7 +68,7 @@ class ExerciseMain : AppCompatActivity() {
         val tvYellowBoxAnswer = findViewById<TextView>(R.id.tvNearlyCorrectAnswerDescription)
         val tvAskingLanguage = findViewById<TextView>(R.id.tvEnglishLanguage)
         val tvAnsweringLanguage = findViewById<TextView>(R.id.tvFinnishLanguage)
-        val tvExerciseProgress = findViewById<TextView>(R.id.tvExerciseProgress)
+        val tvExerciseProgress = findViewById<TextView>(R.id.tvChooseExercise)
 
         val tvCourseName = findViewById<TextView>(R.id.tvCourseName)
         val tvCourseDesc = findViewById<TextView>(R.id.tvTopBarDesc)

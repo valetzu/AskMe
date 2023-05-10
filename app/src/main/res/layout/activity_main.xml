@@ -17,13 +17,15 @@
             android:id="@+id/imgAsky"
             android:layout_width="match_parent"
             android:layout_height="404dp"
+            android:layout_marginTop="30dp"
             android:contentDescription="AskMeLogo"
             app:srcCompat="@drawable/asky_logo" />
 
         <Button
             android:id="@+id/btnOpenExercise"
-            android:layout_width="300dp"
+            android:layout_width="335dp"
             android:layout_height="75dp"
+            android:layout_marginTop="50dp"
             android:backgroundTint="@color/AskMeYellowGeneral"
             android:drawableLeft="@drawable/book_open"
             android:text=" Avaa harjoitus"
@@ -37,24 +39,24 @@
 
         <Button
             android:id="@+id/btnNewExercise"
-            android:layout_width="300dp"
+            android:layout_width="335dp"
             android:layout_height="75dp"
             android:backgroundTint="@color/AskMeGraySettingsButton"
             android:drawableLeft="@android:drawable/ic_lock_lock"
             android:paddingLeft="35dp"
             android:text="Luo uusi harjoitus "
             android:textAlignment="textStart"
-            android:textColor="@color/AskMeGraySettingsToggleButton"
+            android:textColor="@color/AskMeGraySettingsLine"
             android:textSize="24sp"
             android:textStyle="normal"
             app:cornerRadius="10dp"
-            app:iconPadding="15dp"
+            app:iconPadding="27dp"
             app:strokeColor="@color/black"
             app:strokeWidth="3dp" />
 
         <Button
             android:id="@+id/btnSettings"
-            android:layout_width="300dp"
+            android:layout_width="335dp"
             android:layout_height="75dp"
             android:backgroundTint="@color/AskMeGraySettingsButton"
             android:drawableLeft="@drawable/settings_icon"
@@ -64,6 +66,7 @@
             android:textSize="24sp"
             android:textStyle="normal"
             app:cornerRadius="10dp"
+            app:iconPadding="15dp"
             app:strokeColor="@color/black"
             app:strokeWidth="3dp" />
 

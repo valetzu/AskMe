@@ -32,14 +32,14 @@
                 android:textSize="40sp" />
 
             <TextView
-                android:id="@+id/tvExerciseProgress"
+                android:id="@+id/tvChooseExercise"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:text="Avaa harjoitus"
                 android:textColor="@color/black"
-                android:textSize="37sp" />
+                android:textSize="34sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -58,13 +58,13 @@
 
     <Button
         android:id="@+id/btnCreateNewExercise"
-        android:layout_width="360dp"
+        android:layout_width="335dp"
         android:layout_height="75dp"
-        android:backgroundTint="@color/AskMeGraySettingsToggleButton"
+        android:backgroundTint="@color/AskMeGraySettingsButton"
         android:drawableLeft="@android:drawable/ic_lock_lock"
         android:text="Luo uusi harjoitus"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="@color/AskMeGraySettingsLine"
         android:textSize="24sp"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/btnUploadExercise"
@@ -75,13 +75,14 @@
 
     <Button
         android:id="@+id/btnUploadExercise"
-        android:layout_width="360dp"
+        android:layout_width="335dp"
         android:layout_height="75dp"
-        android:backgroundTint="@color/AskMeGraySettingsToggleButton"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/AskMeGraySettingsButton"
         android:drawableLeft="@android:drawable/ic_lock_lock"
         android:text="Tuo harjoitus"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="@color/AskMeGraySettingsLine"
         android:textSize="24sp"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

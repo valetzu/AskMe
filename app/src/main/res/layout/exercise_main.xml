@@ -44,17 +44,18 @@
                     android:paddingTop="20dp"
                     android:text="@string/en1"
                     android:textColor="@color/black"
-                    android:textSize="30sp" />
+                    android:textSize="34sp" />
+
                 <TextView
-                    android:id="@+id/tvExerciseProgress"
+                    android:id="@+id/tvChooseExercise"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingTop="10dp"
+                    android:paddingTop="20dp"
                     android:paddingRight="25dp"
                     android:text="x / x"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
-                    android:textSize="30sp" />
+                    android:textSize="34sp" />
 
             </LinearLayout>
 
@@ -62,7 +63,7 @@
                 android:id="@+id/tvTopBarDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="110dp"
+                android:paddingLeft="107dp"
                 android:paddingBottom="5dp"
                 android:text="@string/englannin_ykk_skappaleen_sanoja"
                 android:textAlignment="textStart"
@@ -301,10 +302,10 @@
 
     <Button
         android:id="@+id/btnCheckButton"
-        android:layout_width="360dp"
-        android:layout_height="80dp"
+        android:layout_width="335dp"
+        android:layout_height="75dp"
 
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/AskMeYellowGeneral"
         android:drawableLeft="@drawable/ok_icon"
 
@@ -326,10 +327,10 @@
 
     <Button
         android:id="@+id/btnContinueButton"
-        android:layout_width="360dp"
-        android:layout_height="80dp"
+        android:layout_width="335dp"
+        android:layout_height="75dp"
 
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/AskMeYellowGeneral"
         android:drawableEnd="@drawable/arrow_right"
         android:text="Jatka"

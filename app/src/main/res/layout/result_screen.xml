@@ -95,7 +95,7 @@
 
         <Button
             android:id="@+id/btnRepeat"
-            android:layout_width="360dp"
+            android:layout_width="335dp"
             android:layout_height="75dp"
             android:backgroundTint="@color/AskMeYellowGeneral"
             android:drawableLeft="@drawable/reset_icon"
@@ -111,7 +111,7 @@
 
         <Button
             android:id="@+id/btnReverse"
-            android:layout_width="360dp"
+            android:layout_width="335dp"
             android:layout_height="75dp"
             android:backgroundTint="@color/AskMeYellowGeneral"
             android:drawableLeft="@drawable/shuffle_icon"
@@ -126,7 +126,7 @@
 
         <Button
             android:id="@+id/btnReturn"
-            android:layout_width="360dp"
+            android:layout_width="335dp"
             android:layout_height="75dp"
             android:backgroundTint="@color/AskMeGraySettingsButton"
 

@@ -23,11 +23,15 @@
             android:layout_height="wrap_content"
             android:background="@color/AskMeYellowGeneral"
             app:cardBackgroundColor="@color/AskMeYellowGeneral"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnExit"
@@ -35,16 +39,19 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/AskMeYellowGeneral"
                     android:drawableLeft="@drawable/close_icon"
-                    android:text="@string/settingsTopBarText"
                     android:textColor="@color/black"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="40sp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                <TextView
+                    android:id="@+id/tvChooseExercise"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Asetukset"
+                    android:textColor="@color/black"
+                    android:textSize="34sp" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
