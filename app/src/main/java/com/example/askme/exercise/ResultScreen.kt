@@ -5,30 +5,28 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.askme.MainActivity
 import com.example.askme.R
 
 class ResultScreen : AppCompatActivity() {
 
     private lateinit var editor: SharedPreferences.Editor
-    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var mediaPlayerResult: MediaPlayer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.result_screen)
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.result)
+        mediaPlayerResult = MediaPlayer.create(this, R.raw.result)
 
-       val sharedPref = getSharedPreferences("my_sf", Context.MODE_PRIVATE)
-       val rightAnswerAmount = sharedPref.getInt("sf_rightAnswer", 0)
-       val wrongAnswerAmount = sharedPref.getInt("sf_wrongAnswer", 0)
-        val nearlyCorrectAnswerAmount = sharedPref.getInt("sf_nearlyCorrectAnswer", 0)
-        val previousPersonalBest = sharedPref.getFloat("sf_personalBest", 0.0f)
-        editor = sharedPref.edit()
+       val sf = getSharedPreferences("my_sf", Context.MODE_PRIVATE)
+       val rightAnswerAmount = sf.getInt("sf_rightAnswer", 0)
+       val wrongAnswerAmount = sf.getInt("sf_wrongAnswer", 0)
+        val nearlyCorrectAnswerAmount = sf.getInt("sf_nearlyCorrectAnswer", 0)
+        val previousPersonalBest = sf.getFloat("sf_personalBest", 0.0f)
+        editor = sf.edit()
 
         val rightAnswers = findViewById<TextView>(R.id.tvRightAnswerAmount)
         val wrongAnswers = findViewById<TextView>(R.id.tvWrongAnswerAmount)
@@ -43,8 +41,12 @@ class ResultScreen : AppCompatActivity() {
         var finalResult = 100f * (rightAnswerAmount + nearlyCorrectAnswerAmount).toFloat()/answerAmount.toFloat()
 
         var wasFlipped = intent.getBooleanExtra("WASFLIPPED", false)
+        var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
+        var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
+        if(!mutedEnabled){
+            mediaPlayerResult.start()
+        }
 
-        mediaPlayer.start()
         rightAnswers.text = "Oikeita vastauksia $rightAnswerAmount"
         wrongAnswers.text = "Vääriä vastauksia $wrongAnswerAmount"
         nearlyCorrectAnswers.text = "Melkein oikein $nearlyCorrectAnswerAmount"

@@ -69,6 +69,7 @@ class ChooseExercise : AppCompatActivity() {
                 putString("sf_coursename", course.name)
                 putString("sf_coursedesc", course.description)
                 putString("sf_coursefilename", course.fileName)
+                putString("sf_courselanguage", course.language)
                 commit()
             }
             startActivity(intent)

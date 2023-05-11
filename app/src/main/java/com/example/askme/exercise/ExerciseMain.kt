@@ -78,6 +78,8 @@ class ExerciseMain : AppCompatActivity() {
         courseName = sf.getString("sf_coursename", "eng_exercise1").toString()
         courseDesc = sf.getString("sf_coursedesc", "eng_exercise1").toString()
         courseLang = sf.getString("sf_courselanguage", "english").toString()
+        var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
+        var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
 
         tvCourseName.text = courseName
         tvCourseDesc.text = courseDesc
@@ -99,11 +101,11 @@ class ExerciseMain : AppCompatActivity() {
         if(flippedOrNot){
             wordPairList = getListWithFlippedLanguages(wordPairList)
             if(courseLang == "english") {
-                tvAskingLanguage.text = "Finnish"
-                tvAnsweringLanguage.text = "English"
+                tvAskingLanguage.text = "suomi"
+                tvAnsweringLanguage.text = "englanti"
             }else if(courseLang == "swedish"){
-                tvAskingLanguage.text = "Finska"
-                tvAnsweringLanguage.text = "Swenska"
+                tvAskingLanguage.text = "suomi"
+                tvAnsweringLanguage.text = "ruotsi"
             }
         }
 
@@ -115,20 +117,16 @@ class ExerciseMain : AppCompatActivity() {
 
         buttonCheckAnswer.setOnClickListener{
             enteredAnswer = editTextAnswer.text.toString()
-            if(enteredAnswer.length == 0){
-                Toast.makeText(this@ExerciseMain, "Input field is empty. Type a translation!", Toast.LENGTH_LONG).show()
-            } else {
-
                 // Stops user from modifying the answer
-
                 editTextAnswer.setEnabled(false)
-
                 //
 
                 var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
                 when(percentageCorrect){
                     100.0 -> {
-                        mediaPlayerSuccess.start()
+                        if(!mutedEnabled) {
+                            mediaPlayerSuccess.start()
+                        }
                         rightAnswerAmount++
                         tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
                         buttonCheckAnswer.visibility = INVISIBLE
@@ -136,7 +134,10 @@ class ExerciseMain : AppCompatActivity() {
                         buttonContinue.visibility = VISIBLE
                     }
                     in nearlyCorrectThresholdPercentage..99.9 -> {
-                        mediaPlayerSuccess.start()
+                        if(!mutedEnabled){
+                            mediaPlayerSuccess.start()
+                        }
+
                         nearlyCorrectAnswers++
                         tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
                         buttonCheckAnswer.visibility = INVISIBLE
@@ -144,7 +145,10 @@ class ExerciseMain : AppCompatActivity() {
                         buttonContinue.visibility = VISIBLE
                     }
                     else -> {
-                        mediaPlayerFail.start()
+                        if(!mutedEnabled){
+                            mediaPlayerFail.start()
+                        }
+
                         wrongAnswerAmount++
                         tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
                         buttonCheckAnswer.visibility = INVISIBLE
@@ -152,7 +156,7 @@ class ExerciseMain : AppCompatActivity() {
                         buttonContinue.visibility = VISIBLE
                     }
                 }
-            }
+
 
         }
 
@@ -186,20 +190,16 @@ class ExerciseMain : AppCompatActivity() {
         fun sendMessage() {
             hideKeyboard(this)
             enteredAnswer = editTextAnswer.text.toString()
-            if(enteredAnswer.length == 0){
-                Toast.makeText(this@ExerciseMain, "Input field is empty. Type a translation!", Toast.LENGTH_LONG).show()
-            } else {
-
                 // Stops user from modifying the answer
-
                 editTextAnswer.setEnabled(false)
-
                 //
 
                 var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
                 when(percentageCorrect){
                     100.0 -> {
-                        mediaPlayerSuccess.start()
+                        if(!mutedEnabled){
+                            mediaPlayerSuccess.start()
+                        }
                         rightAnswerAmount++
                         tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
                         buttonCheckAnswer.visibility = INVISIBLE
@@ -207,7 +207,9 @@ class ExerciseMain : AppCompatActivity() {
                         buttonContinue.visibility = VISIBLE
                     }
                     in nearlyCorrectThresholdPercentage..99.9 -> {
-                        mediaPlayerSuccess.start()
+                        if(!mutedEnabled){
+                            mediaPlayerSuccess.start()
+                        }
                         nearlyCorrectAnswers++
                         tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
                         buttonCheckAnswer.visibility = INVISIBLE
@@ -215,7 +217,9 @@ class ExerciseMain : AppCompatActivity() {
                         buttonContinue.visibility = VISIBLE
                     }
                     else -> {
-                        mediaPlayerFail.start()
+                        if(!mutedEnabled){
+                            mediaPlayerFail.start()
+                        }
                         wrongAnswerAmount++
                         tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
                         buttonCheckAnswer.visibility = INVISIBLE
@@ -223,7 +227,7 @@ class ExerciseMain : AppCompatActivity() {
                         buttonContinue.visibility = VISIBLE
                     }
                 }
-            }
+
         }
 
         findViewById<EditText>(R.id.etEnglishWord).setOnEditorActionListener {v, etEnglishWord, event ->

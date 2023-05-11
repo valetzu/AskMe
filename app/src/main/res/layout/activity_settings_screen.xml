@@ -110,7 +110,7 @@
                     android:drawablePadding="10dp"
                     android:paddingLeft="25dp"
                     android:switchMinWidth="60dp"
-                    android:text="Sovelluksen äänet"
+                    android:text="Mykistä ääniefektit"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -145,7 +145,7 @@
                     android:drawableLeft="@drawable/folder_open"
                     android:drawablePadding="10dp"
                     android:paddingLeft="25dp"
-                    android:text="Tallenna harjoitukset kansioon"
+                    android:text="Harjoituksen sijainti"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -172,6 +172,7 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:paddingLeft="25dp"
+                    app:cardBackgroundColor="@color/AskMeGraySettingsToggleButton"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -181,13 +182,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <EditText
+                        <TextView
                             android:id="@+id/etSavePath"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:drawableLeft="@android:drawable/ic_lock_lock"
                             android:ems="10"
-                            android:hint="Polku: laite/esi/merkki/kansio"
                             android:inputType="text"
+                            android:text="app/res/values/"
                             android:textAlignment="center"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"

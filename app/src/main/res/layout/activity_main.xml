@@ -24,7 +24,7 @@
         <Button
             android:id="@+id/btnOpenExercise"
             android:layout_width="335dp"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/AskMeYellowGeneral"
             android:drawableLeft="@drawable/book_open"
@@ -40,7 +40,7 @@
         <Button
             android:id="@+id/btnNewExercise"
             android:layout_width="335dp"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:backgroundTint="@color/AskMeGraySettingsButton"
             android:drawableLeft="@android:drawable/ic_lock_lock"
             android:paddingLeft="35dp"
@@ -57,7 +57,7 @@
         <Button
             android:id="@+id/btnSettings"
             android:layout_width="335dp"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:backgroundTint="@color/AskMeGraySettingsButton"
             android:drawableLeft="@drawable/settings_icon"
             android:text="Asetukset      "
