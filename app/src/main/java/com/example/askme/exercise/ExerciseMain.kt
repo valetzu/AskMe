@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -15,14 +14,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.askme.MainActivity
 import com.example.askme.R
 
 class ExerciseMain : AppCompatActivity() {
-
     var rightAnswerAmount = 0
     var wrongAnswerAmount = 0
     var nearlyCorrectAnswers = 0
@@ -34,12 +31,9 @@ class ExerciseMain : AppCompatActivity() {
     private lateinit var sf:SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private var wordPairList : MutableList<Pair<String, String>> = mutableListOf()
-    var wordIndex = 0
-
     private lateinit var mediaPlayerSuccess: MediaPlayer
     private lateinit var mediaPlayerFail: MediaPlayer
-
-    var flippedOrNot = false
+    var flippedModeEnabled = false
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,10 +50,10 @@ class ExerciseMain : AppCompatActivity() {
         mediaPlayerSuccess = MediaPlayer.create(this, R.raw.success)
         mediaPlayerFail = MediaPlayer.create(this, R.raw.fail)
 
-        val cardViewRightAnswer = findViewById<CardView>(R.id.cvRightAnswer)!!
-        val cardViewWrongAnswer = findViewById<CardView>(R.id.cvWrongAnswer)!!
-        val cardViewNearlyCorrectAnswer = findViewById<CardView>(R.id.cvNearlyCorrectAnswer)!!
-        val editTextAnswer = findViewById<EditText>(R.id.etEnglishWord)!!
+        val cvRightAnswer = findViewById<CardView>(R.id.cvRightAnswer)!!
+        val cvWrongAnswer = findViewById<CardView>(R.id.cvWrongAnswer)!!
+        val cvNearlyCorrectAnswer = findViewById<CardView>(R.id.cvNearlyCorrectAnswer)!!
+        val etTextAnswer = findViewById<EditText>(R.id.etEnglishWord)!!
         val buttonExit = findViewById<Button>(R.id.btnExit)!!
         val buttonCheckAnswer = findViewById<Button>(R.id.btnCheckButton)!!
         val buttonContinue = findViewById<Button>(R.id.btnContinueButton)
@@ -75,37 +69,37 @@ class ExerciseMain : AppCompatActivity() {
         val tvCourseDesc = findViewById<TextView>(R.id.tvTopBarDesc)
 
         courseFileName = sf.getString("sf_coursefilename", "eng_exercise1").toString()
-        courseName = sf.getString("sf_coursename", "eng_exercise1").toString()
-        courseDesc = sf.getString("sf_coursedesc", "eng_exercise1").toString()
-        courseLang = sf.getString("sf_courselanguage", "english").toString()
+        courseName = sf.getString("sf_coursename", "DefaultValue").toString()
+        courseDesc = sf.getString("sf_coursedesc", "DefaultValue").toString()
+        courseLang = sf.getString("sf_courselanguage", "DefaultValue").toString()
         var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
         var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
 
         tvCourseName.text = courseName
         tvCourseDesc.text = courseDesc
-        flippedOrNot = intent.getBooleanExtra("FLIPPED", false)
+        flippedModeEnabled = intent.getBooleanExtra("FLIPPED", false)
 
-        buttonExit.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-        }
         var exerciseProgress = 1
         var wordIndex = 0
         val nearlyCorrectThresholdPercentage = 75.0
-           wordPairList = readExerciseFromResources(courseFileName.toString())
 
-        if (courseLang == "swedish"){
-            tvAskingLanguage.text = "ruotsi"
-        }
-
-        if(flippedOrNot){
+        if(flippedModeEnabled){
+            wordPairList = readExerciseFromResources(courseFileName)
             wordPairList = getListWithFlippedLanguages(wordPairList)
-            if(courseLang == "english") {
-                tvAskingLanguage.text = "suomi"
-                tvAnsweringLanguage.text = "englanti"
-            }else if(courseLang == "swedish"){
-                tvAskingLanguage.text = "suomi"
-                tvAnsweringLanguage.text = "ruotsi"
+            when(courseLang){
+                "english" -> {
+                    tvAskingLanguage.text = "suomi"
+                    tvAnsweringLanguage.text = "englanti"
+                }
+                "swedish"-> {
+                    tvAskingLanguage.text = "suomi"
+                    tvAnsweringLanguage.text = "ruotsi"
+                }
+            }
+        } else {
+            wordPairList = readExerciseFromResources(courseFileName)
+            when(courseLang){
+                "swedish"-> tvAskingLanguage.text = "ruotsi"
             }
         }
 
@@ -115,64 +109,62 @@ class ExerciseMain : AppCompatActivity() {
             buttonCheckAnswer.text = "Tarkasta vastaus"
             buttonContinue.text = "Jatka"
 
-        buttonCheckAnswer.setOnClickListener{
-            enteredAnswer = editTextAnswer.text.toString()
-                // Stops user from modifying the answer
-                editTextAnswer.setEnabled(false)
-                //
-
-                var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
-                when(percentageCorrect){
-                    100.0 -> {
-                        if(!mutedEnabled) {
-                            mediaPlayerSuccess.start()
-                        }
-                        rightAnswerAmount++
-                        tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
-                        buttonCheckAnswer.visibility = INVISIBLE
-                        cardViewRightAnswer.visibility = VISIBLE
-                        buttonContinue.visibility = VISIBLE
+        fun displayResults(answerCorrectPercentage: Double) {
+            when(answerCorrectPercentage){
+                100.0 -> {
+                    if(!mutedEnabled){
+                        mediaPlayerSuccess.start()
                     }
-                    in nearlyCorrectThresholdPercentage..99.9 -> {
-                        if(!mutedEnabled){
-                            mediaPlayerSuccess.start()
-                        }
-
-                        nearlyCorrectAnswers++
-                        tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
-                        buttonCheckAnswer.visibility = INVISIBLE
-                        cardViewNearlyCorrectAnswer.visibility = VISIBLE
-                        buttonContinue.visibility = VISIBLE
-                    }
-                    else -> {
-                        if(!mutedEnabled){
-                            mediaPlayerFail.start()
-                        }
-
-                        wrongAnswerAmount++
-                        tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
-                        buttonCheckAnswer.visibility = INVISIBLE
-                        cardViewWrongAnswer.visibility = VISIBLE
-                        buttonContinue.visibility = VISIBLE
-                    }
+                    rightAnswerAmount++
+                    tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
+                    buttonCheckAnswer.visibility = INVISIBLE
+                    cvRightAnswer.visibility = VISIBLE
+                    buttonContinue.visibility = VISIBLE
                 }
+                in nearlyCorrectThresholdPercentage..99.9 -> {
+                    if(!mutedEnabled){
+                        mediaPlayerSuccess.start()
+                    }
+                    nearlyCorrectAnswers++
+                    tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
+                    buttonCheckAnswer.visibility = INVISIBLE
+                    cvNearlyCorrectAnswer.visibility = VISIBLE
+                    buttonContinue.visibility = VISIBLE
+                }
+                else -> {
+                    if(!mutedEnabled){
+                        mediaPlayerFail.start()
+                    }
+                    wrongAnswerAmount++
+                    tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
+                    buttonCheckAnswer.visibility = INVISIBLE
+                    cvWrongAnswer.visibility = VISIBLE
+                    buttonContinue.visibility = VISIBLE
+                }
+            }
+        }
 
+        buttonExit.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
 
+        buttonCheckAnswer.setOnClickListener{
+                enteredAnswer = etTextAnswer.text.toString()
+                // Stops user from modifying the answer
+                etTextAnswer.setEnabled(false)
+                //
+                displayResults(checkAnswer(enteredAnswer, wordEnglishAnswer))
         }
 
         buttonContinue.setOnClickListener{
-
             // Resets editText
-
-            editTextAnswer.setEnabled(true)
-
+            etTextAnswer.setEnabled(true)
             //
-
-            Log.d("test", "Correct Answers: ${rightAnswerAmount}, Nearly correct answers: ${nearlyCorrectAnswers}, Wrong answers: ${wrongAnswerAmount}")
-            cardViewRightAnswer.visibility = INVISIBLE
-            cardViewNearlyCorrectAnswer.visibility = INVISIBLE
-            cardViewWrongAnswer.visibility = INVISIBLE
-            editTextAnswer.text.clear()
+            cvRightAnswer.visibility = INVISIBLE
+            cvNearlyCorrectAnswer.visibility = INVISIBLE
+            cvWrongAnswer.visibility = INVISIBLE
+            etTextAnswer.text.clear()
             wordIndex++
             if(wordIndex < wordPairList.size){
                 exerciseProgress++
@@ -189,45 +181,11 @@ class ExerciseMain : AppCompatActivity() {
         //Send button
         fun sendMessage() {
             hideKeyboard(this)
-            enteredAnswer = editTextAnswer.text.toString()
-                // Stops user from modifying the answer
-                editTextAnswer.setEnabled(false)
-                //
-
-                var percentageCorrect = checkAnswer(enteredAnswer, wordEnglishAnswer)
-                when(percentageCorrect){
-                    100.0 -> {
-                        if(!mutedEnabled){
-                            mediaPlayerSuccess.start()
-                        }
-                        rightAnswerAmount++
-                        tvGreenBoxAnswer.text = wordPairList.get(wordIndex).second
-                        buttonCheckAnswer.visibility = INVISIBLE
-                        cardViewRightAnswer.visibility = VISIBLE
-                        buttonContinue.visibility = VISIBLE
-                    }
-                    in nearlyCorrectThresholdPercentage..99.9 -> {
-                        if(!mutedEnabled){
-                            mediaPlayerSuccess.start()
-                        }
-                        nearlyCorrectAnswers++
-                        tvYellowBoxAnswer.text = wordPairList.get(wordIndex).second
-                        buttonCheckAnswer.visibility = INVISIBLE
-                        cardViewNearlyCorrectAnswer.visibility = VISIBLE
-                        buttonContinue.visibility = VISIBLE
-                    }
-                    else -> {
-                        if(!mutedEnabled){
-                            mediaPlayerFail.start()
-                        }
-                        wrongAnswerAmount++
-                        tvRedBoxAnswer.text = wordPairList.get(wordIndex).second
-                        buttonCheckAnswer.visibility = INVISIBLE
-                        cardViewWrongAnswer.visibility = VISIBLE
-                        buttonContinue.visibility = VISIBLE
-                    }
-                }
-
+            enteredAnswer = etTextAnswer.text.toString()
+            // Stops user from modifying the answer
+            etTextAnswer.setEnabled(false)
+            //
+            displayResults(checkAnswer(enteredAnswer, wordEnglishAnswer))
         }
 
         findViewById<EditText>(R.id.etEnglishWord).setOnEditorActionListener {v, etEnglishWord, event ->
@@ -255,7 +213,7 @@ class ExerciseMain : AppCompatActivity() {
     private fun results(){
         saveValuesToSF()
         val intent = Intent(this, ResultScreen::class.java)
-        if (flippedOrNot){
+        if (flippedModeEnabled){
             intent.putExtra("WASFLIPPED", true)
         }
         startActivity(intent)
@@ -303,7 +261,6 @@ class ExerciseMain : AppCompatActivity() {
 
     fun readExerciseFromResources(courseFileName : String) : MutableList<Pair<String, String>>{
         val resourceId = getResources().getIdentifier(courseFileName, "array", packageName)
-        Log.d("wat", "id is $resourceId, courseFileName is $courseFileName")
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
         val array = resources.getStringArray(resourceId)
         array.forEach{
@@ -331,17 +288,14 @@ class ExerciseMain : AppCompatActivity() {
     // and also the number of same characters in a correct spot
     fun checkAnswer(guess : String, answer : String) : Double{
         var correctPercentage: Double = 0.0
-        Log.d("test", "Guess: $guess, Answer: $answer")
         val thresholdGuessLengthToInstaFail = 2
 
         if(guess == answer){
-            Log.d("test", "Guess is completely correct!")
             return 100.0
         }
 
         //Give instafail if guess length exceeds given threshold times actual answer length.
         if(guess.length >= thresholdGuessLengthToInstaFail * answer.length){
-            Log.d("test", "What a shitty try. don't just spam random poop")
             return 0.0
         }
         var answerArticle = ""
@@ -358,20 +312,13 @@ class ExerciseMain : AppCompatActivity() {
             var guessAndArticle = guess.split(' ')
             var guessArticle = guessAndArticle[0]
             var guessWithoutArticle = guessAndArticle[1]
-            Log.d("test", "Guess has a blank space.")
-
             //Split the guess word apart from its article
-
             if (guessArticle.length <= 2){
-                Log.d("test", "Word has an article with length <= 2")
                 if(guessArticle == answerArticle){
-                    Log.d("test", "The article is the correct one")
                     correctPercentage = checkTranslation(guess, answer)
-
                 } else {
                     if(answerWithoutArticle in guess) {
                         //the word is correct except it is missing the article
-                        Log.d("test", "the word is correct except the article is not the correct one, but close")
                         when(guess.length){
                             in answerWithoutArticle.length..answerWithoutArticle.length+2 -> {
                                 return 99.0
@@ -381,38 +328,25 @@ class ExerciseMain : AppCompatActivity() {
                             }
                         }
                     }
-                    Log.d("test", "The article is not the correct one, but close")
                     correctPercentage = checkTranslation(guessWithoutArticle, answerWithoutArticle)
-
                 }
-
             } else {
-                Log.d("test", "The article has over 2 length, assume it's actually the word or just gibberish")
                 correctPercentage = checkTranslation(guess, answerWithoutArticle)
-
             }
         }  else {
-            Log.d("test", "The guess has no blank space")
-
             if(answerWithoutArticle in guess) {
                 //the word is correct except it is missing the article
-                Log.d("test", "the word is correct except it is missing the article")
                 when(guess.length){
                     in answerWithoutArticle.length..answerWithoutArticle.length+2 -> {
-                        Log.d("test", "word is max 2 off from answer length")
                         return 99.0
                     }
                     else -> {
-                        Log.d("test", "word is over 2 longer than answer")
                         return 0.0
                     }
                 }
             }
             correctPercentage = checkTranslation(guess, answerWithoutArticle)
-
         }
-
-    Log.d("test", "In total, the Word was $correctPercentage % Correct")
         return correctPercentage
     }
 
@@ -421,8 +355,6 @@ class ExerciseMain : AppCompatActivity() {
     // and also the number of same characters in a correct spot
     fun checkTranslation(guess : String, answer : String) : Double{
         var correctPercentage: Double = 0.0
-        Log.d("test", "Guess: $guess, Answer: $answer")
-
         //the number of correct characters at correct spot
         var correctCharCount = 0
         var maxCorrectCharCount = answer.length
@@ -435,7 +367,6 @@ class ExerciseMain : AppCompatActivity() {
         for (i in guess.indices) {
             if (guess[i] in answer && checkedChars.count { it == guess[i] } < answer.count { it == guess[i] }) {
                 sameCharsFound++
-                Log.d("testi", "lisayksen jalkeen: $sameCharsFound")
                 checkedChars.add(guess[i])
             }
             if (i >= answer.length) {
@@ -452,8 +383,6 @@ class ExerciseMain : AppCompatActivity() {
             }
         }
         correctPercentage = 100 * (correctCharCount.toDouble() / maxCorrectCharCount.toDouble())
-        Log.d("test", "Word was $correctPercentage % Correct")
-        Log.d("testi", "matchingChars: $checkedChars")
         sameCharsPercentage = (sameCharsFound.toDouble() / answer.length.toDouble()) * 100.0
         correctPercentage = (correctPercentage + sameCharsPercentage) / 2.0
         return correctPercentage
