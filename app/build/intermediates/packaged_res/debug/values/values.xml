@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eng_exercise1">
+            
+        <item>omena,an apple</item>
+        <item>auto,a car</item>
+        <item>kissa,a cat</item>
+        <item>koira,a dog</item>
+        <item>talo,a house</item>
+        <item>kynä,a pen</item>
+        <item>puu,a tree</item>
+        <item>tietokone,a computer</item>
+        <item>kahvi,coffee</item>
+        <item>kaupunki,a city</item>
+        
+    </string-array>
+    <string-array name="eng_exercise2">
+            
+        <item>mansikka,a strawberry</item>
+		<item>vadelma,a raspberry</item>
+		<item>mustikka,a blueberry</item>
+		<item>herukka,a currant</item>
+		<item>karviainen,a gooseberry</item>
+		<item>puolukka,a lingonberry</item>
+		<item>viinimarja,a grape</item>
+		<item>omena,an apple</item>
+		<item>päärynä,a pear</item>
+		<item>banaani,a banana</item>
+        
+    </string-array>
+    <string-array name="eng_exercise3">
+            
+        <item>omena,an apple</item>
+        <item>auto,a car</item>
+        <item>kissa,a cat</item>
+        <item>koira,a dog</item>
+        <item>talo,a house</item>
+        <item>kynä,a pen</item>
+        <item>puu,a tree</item>
+        <item>tietokone,a computer</item>
+        <item>kahvi,coffee</item>
+        <item>kaupunki,a city</item>
+        
+    </string-array>
+    <string-array name="eng_exercise4">
+            
+        <item>mansikka,a strawberry</item>
+		<item>vadelma,a raspberry</item>
+		<item>mustikka,a blueberry</item>
+		<item>herukka,a currant</item>
+		<item>karviainen,a gooseberry</item>
+		<item>puolukka,a lingonberry</item>
+		<item>viinimarja,a grape</item>
+		<item>omena,an apple</item>
+		<item>päärynä,a pear</item>
+		<item>banaani,a banana</item>
+        
+    </string-array>
+    <string-array name="swe_exercise1">
+            
+        <item>omena,ett äpple</item>
+    <item>banaani,en banan</item>
+    <item>appelsiini,en apelsin</item>
+    <item>sitruuna,en citron</item>
+    <item>greippi,en grapefrukt</item>
+    <item>kiwi,ett kiwi</item>
+    <item>ananas,ett ananas</item>
+    <item>mansikka,en jordgubbe</item>
+    <item>vadelma,en hallon</item>
+    <item>mustikka,en blåbär</item>
+        
+    </string-array>
+    <color name="AskMeFaintWhiteFinnishWord">#EBEFF2</color>
+    <color name="AskMeGraySettingsButton">#D9D9D9</color>
+    <color name="AskMeGraySettingsLine">#7F8A8E</color>
+    <color name="AskMeGraySettingsToggleButton">#C8CDD1</color>
+    <color name="AskMeGreenCorrectAnswer">#27C11A</color>
+    <color name="AskMeNearlyCorrectAnswer">#FAB70C</color>
+    <color name="AskMeRedWrongAnswer">#F06666</color>
+    <color name="AskMeYellowGeneral">#FAB70C</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="ENG_Exercise1">eng_exercise1</string>
+    <string name="TestExercise">exercisetest</string>
+    <string name="a_horse">A horse</string>
+    <string name="app_name">AskMe</string>
+    <string name="continueExercise">Jatka</string>
+    <string name="en1">EN1</string>
+    <string name="en_1">EN 1</string>
+    <string name="englannin_ykk_skappaleen_sanoja">Englannin ykköskappaleen sanoja</string>
+    <string name="englanti">englanti</string>
+    <string name="hevonen">hevonen</string>
+    <string name="info_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod augue vel enim aliquet, eu convallis augue finibus. Integer fermentum quam sed eros laoreet, eget sodales nisl ultrices. Nunc maximus libero nec lectus ultrices aliquet. Proin convallis feugiat nunc, ac dapibus sapien dictum eu. Donec at nisl eget sem consectetur rhoncus. Sed vitae ultricies ex. Ut bibendum ultrices vestibulum. Quisque varius risus ut mi pellentesque, vel dictum magna tincidunt. Pellentesque suscipit, risus eget mollis commodo, sapien ipsum finibus erat, at commodo ex dolor vel ante. Aliquam auctor augue id erat rhoncus, nec imperdiet augue accumsan. Nullam ut mauris ac nibh suscipit tempor a id urna. Suspendisse varius diam ac gravida sollicitudin. Vivamus ullamcorper a ex vitae viverra."</string>
+    <string name="kirjoita_vastauksesi_t_h_n">Kirjoita vastauksesi tähän</string>
+    <string name="lahes_oikein">Lähes oikein!</string>
+    <string name="oikein">Oikein!</string>
+    <string name="oikeita_vastauksia_x">Oikeita vastauksia X</string>
+    <string name="palaa_p_valikkoon">Palaa päävalikkoon</string>
+    <string name="progressPlaceholder">x / x</string>
+    <string name="settingsTopBarText">Asetukset</string>
+    <string name="sovelluksen_ovat_kehitt_neet_valtteri_ja_artturi_nse_on_megahyv_sovellus">Sovelluksen ovat kehittäneet Valtteri ja Artturi.\nSe on megahyvä sovellus!!!</string>
+    <string name="suomi">suomi</string>
+    <string name="tarkasta_vastaus">Tarkista</string>
+    <string name="tulos_x">Tulos X</string>
+    <string name="v_ri_vastauksia_x">Vääriä vastauksia X</string>
+    <string name="v_rin">Väärin</string>
+    <string name="x">X</string>
+    <style name="Base.Theme.AskMe" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Button.Yellow" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/AskMeYellowGeneral</item>
+    </style>
+    <style name="Theme.AskMe" parent="Base.Theme.AskMe"/>
+</resources>

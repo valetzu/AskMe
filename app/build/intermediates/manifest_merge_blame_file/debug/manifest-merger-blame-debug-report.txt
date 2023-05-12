@@ -1,0 +1,139 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.askme"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml
+10
+11    <permission
+11-->[androidx.core:core:1.9.0] C:\Users\valts\.gradle\caches\transforms-3\b270d1a26e91fe5547d283a56cc4ab3b\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+12        android:name="com.example.askme.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.9.0] C:\Users\valts\.gradle\caches\transforms-3\b270d1a26e91fe5547d283a56cc4ab3b\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.9.0] C:\Users\valts\.gradle\caches\transforms-3\b270d1a26e91fe5547d283a56cc4ab3b\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+14
+15    <uses-permission android:name="com.example.askme.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.9.0] C:\Users\valts\.gradle\caches\transforms-3\b270d1a26e91fe5547d283a56cc4ab3b\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.9.0] C:\Users\valts\.gradle\caches\transforms-3\b270d1a26e91fe5547d283a56cc4ab3b\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+16
+17    <application
+17-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:5:5-50:19
+18        android:allowBackup="true"
+18-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:6:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.9.0] C:\Users\valts\.gradle\caches\transforms-3\b270d1a26e91fe5547d283a56cc4ab3b\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+20        android:dataExtractionRules="@xml/data_extraction_rules"
+20-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:7:9-65
+21        android:debuggable="true"
+22        android:extractNativeLibs="false"
+23        android:fullBackupContent="@xml/backup_rules"
+23-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:8:9-54
+24        android:icon="@drawable/asky_logo"
+24-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:9:9-43
+25        android:label="@string/app_name"
+25-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:10:9-41
+26        android:roundIcon="@drawable/asky_logo"
+26-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:11:9-48
+27        android:supportsRtl="true"
+27-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:12:9-35
+28        android:theme="@style/Theme.AskMe" >
+28-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:13:9-43
+29        <activity
+29-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:15:9-19:50
+30            android:name="com.example.askme.settings.SettingsScreen"
+30-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:16:13-52
+31            android:exported="false"
+31-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:17:13-37
+32            android:label="SettingsMain"
+32-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:18:13-41
+33            android:theme="@style/Theme.AskMe" />
+33-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:19:13-47
+34        <activity
+34-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:20:9-24:58
+35            android:name="com.example.askme.exercise.ExerciseMain"
+35-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:21:13-50
+36            android:label="ExerciseMain"
+36-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:22:13-41
+37            android:theme="@style/Theme.AskMe"
+37-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:23:13-47
+38            android:windowSoftInputMode="stateVisible" />
+38-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:24:13-55
+39        <activity
+39-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:25:9-28:50
+40            android:name="com.example.askme.exercise.ChooseExercise"
+40-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:26:13-52
+41            android:label="ChooseExercise"
+41-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:27:13-43
+42            android:theme="@style/Theme.AskMe" />
+42-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:28:13-47
+43        <activity
+43-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:29:9-32:50
+44            android:name="com.example.askme.exercise.ResultScreen"
+44-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:30:13-50
+45            android:label="ResultScreen"
+45-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:31:13-41
+46            android:theme="@style/Theme.AskMe" />
+46-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:32:13-47
+47        <activity
+47-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:33:9-36:49
+48            android:name="com.example.askme.settings.HelpScreen"
+48-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:34:13-48
+49            android:label="HelpScreen"
+49-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:35:13-39
+50            android:theme="@style/Theme.AskMe" />
+50-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:36:13-47
+51        <activity
+51-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:37:9-40:49
+52            android:name="com.example.askme.settings.InfoScreen"
+52-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:38:13-48
+53            android:label="InfoScreen"
+53-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:39:13-39
+54            android:theme="@style/Theme.AskMe" />
+54-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:40:13-47
+55        <activity
+55-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:41:9-49:20
+56            android:name="com.example.askme.MainActivity"
+56-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:42:13-41
+57            android:exported="true" >
+57-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:43:13-36
+58            <intent-filter>
+58-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:44:13-48:29
+59                <action android:name="android.intent.action.MAIN" />
+59-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:45:17-69
+59-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:45:25-66
+60
+61                <category android:name="android.intent.category.LAUNCHER" />
+61-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:47:17-77
+61-->G:\Misc\github\AskMe\app\src\main\AndroidManifest.xml:47:27-74
+62            </intent-filter>
+63        </activity>
+64
+65        <provider
+65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+66            android:name="androidx.startup.InitializationProvider"
+66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+67            android:authorities="com.example.askme.androidx-startup"
+67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+68            android:exported="false" >
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+69            <meta-data
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+70                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+71                android:value="androidx.startup" />
+71-->[androidx.emoji2:emoji2:1.2.0] C:\Users\valts\.gradle\caches\transforms-3\d1735c872afea04148904d9dcaaead07\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+72            <meta-data
+72-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\valts\.gradle\caches\transforms-3\13e497b7eaaadcc2b20f8c9992f4a897\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+73                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+73-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\valts\.gradle\caches\transforms-3\13e497b7eaaadcc2b20f8c9992f4a897\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+74                android:value="androidx.startup" />
+74-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\valts\.gradle\caches\transforms-3\13e497b7eaaadcc2b20f8c9992f4a897\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+75        </provider>
+76    </application>
+77
+78</manifest>

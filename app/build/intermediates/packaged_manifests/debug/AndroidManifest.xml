@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.askme"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="33" />
+
+    <permission
+        android:name="com.example.askme.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.askme.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/asky_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/asky_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AskMe" >
+        <activity
+            android:name="com.example.askme.settings.SettingsScreen"
+            android:exported="false"
+            android:label="SettingsMain"
+            android:theme="@style/Theme.AskMe" />
+        <activity
+            android:name="com.example.askme.exercise.ExerciseMain"
+            android:label="ExerciseMain"
+            android:theme="@style/Theme.AskMe"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="com.example.askme.exercise.ChooseExercise"
+            android:label="ChooseExercise"
+            android:theme="@style/Theme.AskMe" />
+        <activity
+            android:name="com.example.askme.exercise.ResultScreen"
+            android:label="ResultScreen"
+            android:theme="@style/Theme.AskMe" />
+        <activity
+            android:name="com.example.askme.settings.HelpScreen"
+            android:label="HelpScreen"
+            android:theme="@style/Theme.AskMe" />
+        <activity
+            android:name="com.example.askme.settings.InfoScreen"
+            android:label="InfoScreen"
+            android:theme="@style/Theme.AskMe" />
+        <activity
+            android:name="com.example.askme.MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="com.example.askme.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+
+</manifest>

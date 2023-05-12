@@ -19,8 +19,6 @@ class SettingsScreen : AppCompatActivity() {
         setContentView(R.layout.activity_settings_screen)
         sf = getSharedPreferences("my_sf", MODE_PRIVATE)
         editor = sf.edit()
-
-        var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
         var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
         val buttonExit = findViewById<Button>(R.id.btnExit)
         val buttonInfo = findViewById<Button>(R.id.btnInfo)
