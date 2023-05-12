@@ -72,17 +72,16 @@ class ExerciseMain : AppCompatActivity() {
         courseName = sf.getString("sf_coursename", "DefaultValue").toString()
         courseDesc = sf.getString("sf_coursedesc", "DefaultValue").toString()
         courseLang = sf.getString("sf_courselanguage", "DefaultValue").toString()
-        var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
-        var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
+        val mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
 
         tvCourseName.text = courseName
         tvCourseDesc.text = courseDesc
         flippedModeEnabled = intent.getBooleanExtra("FLIPPED", false)
-
         var exerciseProgress = 1
         var wordIndex = 0
         val nearlyCorrectThresholdPercentage = 75.0
 
+        //Depending on the mode, update the guess and answer languages
         if(flippedModeEnabled){
             wordPairList = readExerciseFromResources(courseFileName)
             wordPairList = getListWithFlippedLanguages(wordPairList)
@@ -103,12 +102,18 @@ class ExerciseMain : AppCompatActivity() {
             }
         }
 
+        //Update exercise progress
         tvExerciseProgress.text = "$exerciseProgress / ${wordPairList.size}"
+        //Update initial words to be displayed
             wordFinnish.text = wordPairList.get(wordIndex).first
         var wordEnglishAnswer = wordPairList.get(wordIndex).second
             buttonCheckAnswer.text = "Tarkasta vastaus"
             buttonContinue.text = "Jatka"
 
+        /**
+         * Displays the results of the answer correct percentage.
+         * @param answerCorrectPercentage The percentage of correct answers.
+         */
         fun displayResults(answerCorrectPercentage: Double) {
             when(answerCorrectPercentage){
                 100.0 -> {
@@ -178,6 +183,9 @@ class ExerciseMain : AppCompatActivity() {
             }
         }
 
+        /**
+         * Changes the enter key to a send key on the keyboard. Acts as the check answer button in this context.
+         */
         //Send button
         fun sendMessage() {
             hideKeyboard(this)
@@ -200,7 +208,10 @@ class ExerciseMain : AppCompatActivity() {
         //Send button ends
     }
 
-    //Hides keyboard
+
+    /**
+     * Hides the keyboard, when "send" button on the keyboard is pressed.
+     */
     private fun hideKeyboard(activity: Activity) {
         val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         var view = activity.currentFocus
@@ -210,6 +221,9 @@ class ExerciseMain : AppCompatActivity() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    /**
+     * Completes the exercise completion activities
+     */
     private fun results(){
         saveValuesToSF()
         val intent = Intent(this, ResultScreen::class.java)
@@ -232,6 +246,9 @@ class ExerciseMain : AppCompatActivity() {
         getValuesFromSF()
     }
 
+    /**
+     * Saves the values to shared preferences
+     */
     fun saveValuesToSF(){
         editor.apply{
             putInt("sf_rightAnswer", rightAnswerAmount)
@@ -240,7 +257,9 @@ class ExerciseMain : AppCompatActivity() {
             commit()
         }
     }
-
+    /**
+     * Resets the values in shared preferences.
+     */
     fun resetValuesInSF(){
         editor.apply{
             putInt("sf_rightAnswer", 0)
@@ -250,6 +269,9 @@ class ExerciseMain : AppCompatActivity() {
         }
     }
 
+    /**
+     * Reads the values from shared preferences.
+     */
     fun getValuesFromSF(){
         wrongAnswerAmount = sf.getInt("sf_rightAnswer", 0)
         rightAnswerAmount = sf.getInt("sf_wrongAnswer", 0)
@@ -259,6 +281,11 @@ class ExerciseMain : AppCompatActivity() {
         courseDesc = sf.getString("sf_coursedesc", "eng_exercise1").toString()
     }
 
+    /**
+     * Reads an exercise from resources.
+     * @param courseFileName The name of the course file.
+     * @return The list of pairs.
+     */
     fun readExerciseFromResources(courseFileName : String) : MutableList<Pair<String, String>>{
         val resourceId = getResources().getIdentifier(courseFileName, "array", packageName)
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
@@ -271,8 +298,11 @@ class ExerciseMain : AppCompatActivity() {
         return tempWordPairList
     }
 
-    //Takes: Mutable string pair list as parameter
-    //Returns: same list with flipped word pairs (before: FIN:ENG, after: ENG:FIN or vice versa)
+    /**
+     * Returns a list with the languages flipped.
+     * @param listToFlip The list to flip.
+     * @return The flipped list. (ie. before: pair FIN:ENG, after: ENG:FIN or vice versa)
+     */
     fun getListWithFlippedLanguages(listToFlip : MutableList<Pair<String,String>>) : MutableList<Pair<String,String>>{
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
         listToFlip.forEach{
@@ -282,10 +312,16 @@ class ExerciseMain : AppCompatActivity() {
         return tempWordPairList
     }
 
-    //Determines a proper comparison treatment for the guess given.
-    //Returns the % of similarity to the given answer
-    //Takes into account the number of same character occurences
-    // and also the number of same characters in a correct spot
+
+    /**
+     * Determines a proper comparison treatment for the guess given.
+     * Returns the % of similarity to the given answer.
+     * Takes into account the number of same character occurences
+     * and also the number of same characters in a correct spot.
+     * @param guess The string that contains the guess.
+     * @param answer The string that contains the correct answer.
+     * @return The percentage of similarity to the given answer.
+     */
     fun checkAnswer(guess : String, answer : String) : Double{
         var correctPercentage: Double = 0.0
         val thresholdGuessLengthToInstaFail = 2
@@ -309,9 +345,9 @@ class ExerciseMain : AppCompatActivity() {
 
         //If the guess has a blank space, treat it as a word with an article in front
         if(" " in guess){
-            var guessAndArticle = guess.split(' ')
-            var guessArticle = guessAndArticle[0]
-            var guessWithoutArticle = guessAndArticle[1]
+            val guessAndArticle = guess.split(' ')
+            val guessArticle = guessAndArticle[0]
+            val guessWithoutArticle = guessAndArticle[1]
             //Split the guess word apart from its article
             if (guessArticle.length <= 2){
                 if(guessArticle == answerArticle){
@@ -350,14 +386,20 @@ class ExerciseMain : AppCompatActivity() {
         return correctPercentage
     }
 
-    //Does the actual comparison between given word and the answer, returns the similarity %
-    //Takes into account the number of same character occurences
-    // and also the number of same characters in a correct spot
+    /**
+     * * Does the actual comparison between given word and the answer.
+     * Takes into account the number of same character occurences
+     * and also the number of same characters in a correct spot
+     * Returns the percentage of correct characters in the guess string.
+     * @param guess The string that contains the guess.
+     * @param answer The string that contains the correct answer.
+     * @return The percentage of correct characters in the guess string (similarity%).
+     */
     fun checkTranslation(guess : String, answer : String) : Double{
         var correctPercentage: Double = 0.0
         //the number of correct characters at correct spot
         var correctCharCount = 0
-        var maxCorrectCharCount = answer.length
+        val maxCorrectCharCount = answer.length
         //
         //The number of same character occurences
         var sameCharsFound = 0
@@ -370,7 +412,6 @@ class ExerciseMain : AppCompatActivity() {
                 checkedChars.add(guess[i])
             }
             if (i >= answer.length) {
-                //correctCharCount--
                 sameCharsFound--
                 if (sameCharsFound < 0){
                     break

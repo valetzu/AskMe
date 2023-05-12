@@ -24,5 +24,7 @@
     <string name="info_text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod augue vel enim aliquet, eu convallis augue finibus. Integer fermentum quam sed eros laoreet, eget sodales nisl ultrices. Nunc maximus libero nec lectus ultrices aliquet. Proin convallis feugiat nunc, ac dapibus sapien dictum eu. Donec at nisl eget sem consectetur rhoncus. Sed vitae ultricies ex. Ut bibendum ultrices vestibulum. Quisque varius risus ut mi pellentesque, vel dictum magna tincidunt. Pellentesque suscipit, risus eget mollis commodo, sapien ipsum finibus erat, at commodo ex dolor vel ante. Aliquam auctor augue id erat rhoncus, nec imperdiet augue accumsan. Nullam ut mauris ac nibh suscipit tempor a id urna. Suspendisse varius diam ac gravida sollicitudin. Vivamus ullamcorper a ex vitae viverra."</string>
     <string name="englannin_ykk_skappaleen_sanoja">Englannin ykköskappaleen sanoja</string>
     <string name="sovelluksen_ovat_kehitt_neet_valtteri_ja_artturi_nse_on_megahyv_sovellus">Sovelluksen ovat kehittäneet Valtteri ja Artturi.\nSe on megahyvä sovellus!!!</string>
+    <string name="progressPlaceholder">x / x</string>
+    <string name="continueExercise">Jatka</string>
 
 </resources>
