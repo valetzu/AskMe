@@ -41,7 +41,6 @@ class ResultScreen : AppCompatActivity() {
         var finalResult = 100f * (rightAnswerAmount + nearlyCorrectAnswerAmount).toFloat()/answerAmount.toFloat()
 
         var wasFlipped = intent.getBooleanExtra("WASFLIPPED", false)
-        var darkmodeEnabled = sf.getBoolean("sf_darkmode_enabled", false)
         var mutedEnabled = sf.getBoolean("sf_muted_enabled", false)
         if(!mutedEnabled){
             mediaPlayerResult.start()

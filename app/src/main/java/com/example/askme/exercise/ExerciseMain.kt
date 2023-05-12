@@ -249,7 +249,7 @@ class ExerciseMain : AppCompatActivity() {
     /**
      * Saves the values to shared preferences
      */
-    fun saveValuesToSF(){
+    private fun saveValuesToSF(){
         editor.apply{
             putInt("sf_rightAnswer", rightAnswerAmount)
             putInt("sf_wrongAnswer", wrongAnswerAmount)
@@ -260,7 +260,7 @@ class ExerciseMain : AppCompatActivity() {
     /**
      * Resets the values in shared preferences.
      */
-    fun resetValuesInSF(){
+    private fun resetValuesInSF(){
         editor.apply{
             putInt("sf_rightAnswer", 0)
             putInt("sf_wrongAnswer", 0)
@@ -272,7 +272,7 @@ class ExerciseMain : AppCompatActivity() {
     /**
      * Reads the values from shared preferences.
      */
-    fun getValuesFromSF(){
+    private fun getValuesFromSF(){
         wrongAnswerAmount = sf.getInt("sf_rightAnswer", 0)
         rightAnswerAmount = sf.getInt("sf_wrongAnswer", 0)
         nearlyCorrectAnswers = sf.getInt("sf_nearlyCorrectAnswer", 0)
@@ -286,7 +286,7 @@ class ExerciseMain : AppCompatActivity() {
      * @param courseFileName The name of the course file.
      * @return The list of pairs.
      */
-    fun readExerciseFromResources(courseFileName : String) : MutableList<Pair<String, String>>{
+    private fun readExerciseFromResources(courseFileName : String) : MutableList<Pair<String, String>>{
         val resourceId = getResources().getIdentifier(courseFileName, "array", packageName)
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
         val array = resources.getStringArray(resourceId)
@@ -303,7 +303,7 @@ class ExerciseMain : AppCompatActivity() {
      * @param listToFlip The list to flip.
      * @return The flipped list. (ie. before: pair FIN:ENG, after: ENG:FIN or vice versa)
      */
-    fun getListWithFlippedLanguages(listToFlip : MutableList<Pair<String,String>>) : MutableList<Pair<String,String>>{
+    private fun getListWithFlippedLanguages(listToFlip : MutableList<Pair<String,String>>) : MutableList<Pair<String,String>>{
         val tempWordPairList : MutableList<Pair<String, String>> = mutableListOf()
         listToFlip.forEach{
             val flippedPair = Pair<String, String>(it.second, it.first)
@@ -322,7 +322,7 @@ class ExerciseMain : AppCompatActivity() {
      * @param answer The string that contains the correct answer.
      * @return The percentage of similarity to the given answer.
      */
-    fun checkAnswer(guess : String, answer : String) : Double{
+    private fun checkAnswer(guess : String, answer : String) : Double{
         var correctPercentage: Double = 0.0
         val thresholdGuessLengthToInstaFail = 2
 
@@ -395,7 +395,7 @@ class ExerciseMain : AppCompatActivity() {
      * @param answer The string that contains the correct answer.
      * @return The percentage of correct characters in the guess string (similarity%).
      */
-    fun checkTranslation(guess : String, answer : String) : Double{
+    private fun checkTranslation(guess : String, answer : String) : Double{
         var correctPercentage: Double = 0.0
         //the number of correct characters at correct spot
         var correctCharCount = 0

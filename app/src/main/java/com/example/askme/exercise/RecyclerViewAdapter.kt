@@ -14,17 +14,29 @@ class RecyclerViewAdapter(private val courseList:List<Course>, private val click
         val listItem = layoutInflater.inflate(R.layout.list_item, parent, false)
         return MyViewHolder(listItem)
     }
-
+/**
+ * Returns the amount of the courses currently in the list
+ * @return Int size of the list
+ * */
     override fun getItemCount(): Int {
         return courseList.size
     }
 
+/**
+ * OnBindViewHolderFunction
+ * Binds the variables of the course object into the view.
+ * @param holder The viewholder object into what the binding happens
+ * @param position The index of the object being bound
+ * */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val course = courseList[position]
         holder.bind(course,clickListener)
     }
 }
 
+/**
+ * The viewholder-class for the recyclerview
+ */
 class MyViewHolder(val view: View):RecyclerView.ViewHolder(view){
     fun bind(course: Course, clickListener: (Course) -> Unit){
         val itemButton = view.findViewById<TextView>(R.id.tvItem)
