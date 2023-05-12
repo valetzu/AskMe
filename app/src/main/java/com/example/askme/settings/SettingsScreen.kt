@@ -25,10 +25,8 @@ class SettingsScreen : AppCompatActivity() {
         val buttonExit = findViewById<Button>(R.id.btnExit)
         val buttonInfo = findViewById<Button>(R.id.btnInfo)
         val buttonHelp = findViewById<Button>(R.id.btnHelp)
-        val darkModeSwitch = findViewById<Switch>(R.id.swEnableDarkMode)
         val muteSwitch = findViewById<Switch>(R.id.swEnableSound)
 
-        darkModeSwitch.isChecked = darkmodeEnabled
         muteSwitch.isChecked = mutedEnabled
 
         buttonExit.setOnClickListener{
@@ -45,16 +43,6 @@ class SettingsScreen : AppCompatActivity() {
             val intent = Intent(this, HelpScreen::class.java)
             startActivity(intent)
         }
-
-        darkModeSwitch?.setOnCheckedChangeListener({ _ , isChecked ->
-            val message = if (isChecked) "Dark mode enabled" else "Dark mode disabled"
-            Toast.makeText(this@SettingsScreen, message,
-            Toast.LENGTH_SHORT).show()
-            editor.apply{
-                putBoolean("sf_darkmode_enabled", isChecked)
-                commit()
-            }
-        })
 
         muteSwitch?.setOnCheckedChangeListener({ _ , isChecked ->
             val message = if (isChecked) "Sound Muted" else "Sound Unmuted"
